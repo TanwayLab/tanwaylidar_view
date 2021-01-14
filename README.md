@@ -112,7 +112,8 @@ rosrun tanwaylidar_view tensorpro_interfaces
 
 | 版本号             | 时间          | 描述     | 
 | ---------------------| ----------------- | ---------- |
-| tensorpro_view v1.1.5 | 2020年6月1日 | 解析UDP数据包并发布为PointCloud2数据格式 | 
+| tanwaylidar_view v1.1.5 | 2020年6月1日 | 解析UDP数据包并发布为PointCloud2数据格式 | 
 | tensorpro_view v1.1.6 | 2020年6月22日 | 修改buf数据类型为u_char | 
+| tanwaylidar_view v2.0.0 | 2021年1月14日 | 提交新的架构软件版本 | 
 
 
