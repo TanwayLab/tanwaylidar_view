@@ -1,5 +1,5 @@
-# tensorpro_view
-TensorPro_PC_v1.1.6_2020622是探维科技TensorPro系列产品的上位机软件，在Ubuntu18.04环境下开发测试通过。
+# tanwaylidar_view
+tanwaylidar_view是探维科技系列产品的上位机软件，在Ubuntu18.04环境下开发测试通过。
 
 软件需在ROS环境下使用，ROS安装参见[安装教程](http://wiki.ros.org/ROS/Installation "")。
 
@@ -19,28 +19,28 @@ TensorPro_PC_v1.1.6_2020622是探维科技TensorPro系列产品的上位机软�
 1. 创建ROS工作空间
 
 ```bash
-mkdir -p ~/tensorpro_driver/src
-cd ~/tensorpro_driver/src
+mkdir -p ~/tanwaylidar_driver/src
+cd ~/tanwaylidar_driver/src
 ```
 
 1. 下载代码
 
 ```bash
-git clone https://github.com/TanwayLab/tensorpro_view.git
+git clone https://github.com/tanwayRD/tanwaylidar_view.git
 ```
 
-输入用户名密码，下载成功后，～/tensorpro_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到/tensorpro_driver/src文件夹下。
+输入用户名密码，下载成功后，～/tanwaylidar_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到/tanwaylidar_driver/src文件夹下。
 
 1. 编译程序
 
 ```bash
-cd ~/tensorpro_driver && catkin_make
+cd ~/tanwaylidar_driver && catkin_make
 ```
 
 1. 设置环境变量
 
 ```bash
-echo "source ~/tensorpro_driver/devel/setup.bash" >> ~/.bashrc
+echo "source ~/tanwaylidar_driver/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -48,10 +48,10 @@ source ~/.bashrc
 
 1. 修改电脑IP为与雷达通信的IP，默认为"192.168.111.204"
 
-1. 正常查看点云
+1. 正常查看点云(以TensorPro设备为例)
 
 ```bash
-roslaunch tensorpro_view Tensorpro.launch
+roslaunch tanwaylidar_view TensorPro.launch
 ```
 
 ![](./resource/pic/example.png "")
@@ -60,7 +60,7 @@ roslaunch tensorpro_view Tensorpro.launch
 # IP修改工具使用
 
 ```bash
-rosrun tensorpro_view tensorpro_interfaces
+rosrun tanwaylidar_view tensorpro_interfaces
 ```
 
 弹出用户交互界面如下,
