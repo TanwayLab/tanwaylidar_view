@@ -1,0 +1,20 @@
+<launch>
+  <arg name="host" default="192.168.111.204" />
+  <arg name="frame_id" default="TanwayTP" />
+
+  <node pkg="tanwaylidar_view" name="TanwayLidar_MainNode" type="TanwayLidar_MainNode" output = "screen">
+    <param name="host" value="$(arg host)" />
+    <param name="frame_id" value="$(arg frame_id)" />
+
+    <param name="port"  type="int" value="5600" />
+    <param name="LiDARport"  type="int" value="5050" />
+    <param name="LiDARhost"  type="string" value="192.168.111.51" />
+    <param name="StartAngle"  type="double" value="30" />
+    <param name="EndAngle"  type="double" value="150" />
+
+    <param name="LidarType" type="int" value="2"/> 
+
+   </node>
+
+   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tanwaylidar_view)/rviz/tanwayrun.rviz" />
+</launch>

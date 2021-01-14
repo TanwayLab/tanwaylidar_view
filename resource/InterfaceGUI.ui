@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Mainwindow</class>
+ <widget class="QMainWindow" name="Mainwindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>840</width>
+    <height>663</height>
+   </rect>
+  </property>
+  <property name="palette">
+   <palette>
+    <active>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>249</red>
+        <green>248</green>
+        <blue>248</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </active>
+    <inactive>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>255</red>
+        <green>255</green>
+        <blue>255</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>249</red>
+        <green>248</green>
+        <blue>248</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </inactive>
+    <disabled>
+     <colorrole role="Base">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>249</red>
+        <green>248</green>
+        <blue>248</blue>
+       </color>
+      </brush>
+     </colorrole>
+     <colorrole role="Window">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>249</red>
+        <green>248</green>
+        <blue>248</blue>
+       </color>
+      </brush>
+     </colorrole>
+    </disabled>
+   </palette>
+  </property>
+  <property name="windowTitle">
+   <string>Tanway User Menu</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="NewLiDARIP1">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>336</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewLiDARIP2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>336</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewLiDARIP3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>336</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewLiDARIP4">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>336</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewLiDARIP_label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>336</y>
+      <width>103</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>LiDAR IP:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewLPdot1">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>336</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewLPdot2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>336</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewLPdot3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>336</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewLiDARPort_label">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>336</y>
+      <width>126</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>LiDAR Port:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewLiDARPort">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>336</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewHOSTIP3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>376</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewHPdot2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>376</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewHOSTPort">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>376</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewHOSTIP1">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>376</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewHPdot3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>376</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewHOSTIP_label_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>376</y>
+      <width>103</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>HOST IP:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewHOSTIP4">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>376</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewHPdot1">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>376</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="NewHOSTIP2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>376</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="NewHOSTPort_label">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>376</y>
+      <width>126</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>HOST Port:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SetIP">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>416</y>
+      <width>99</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>确认修改</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>446</y>
+      <width>511</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>236</y>
+      <width>511</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriLiDARPort">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>126</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>5050</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriHOSTIP4">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>166</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>204</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriHPdot3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>166</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriLPdot2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>126</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriLiDARIP2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>126</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>168</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriLPdot1">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>126</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriLiDARPort_label">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>126</y>
+      <width>126</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>LiDAR Port:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriHPdot2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>166</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriLiDARIP_label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>126</y>
+      <width>103</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>LiDAR IP:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriHOSTIP3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>166</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>111</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriLiDARIP3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>126</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>111</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriHOSTPort_label">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>166</y>
+      <width>126</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>HOST Port:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriLiDARIP1">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>126</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>192</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriHPdot1">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>166</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriHOSTIP_label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>166</y>
+      <width>103</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>HOST IP:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriLiDARIP4">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>126</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>51</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriHOSTIP2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>166</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>168</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriHOSTIP1">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>166</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>192</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="OriLPdot3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>126</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>.</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="OriHOSTPort">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>166</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>5600</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Check">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>206</y>
+      <width>99</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>连接雷达</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>266</y>
+      <width>160</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <italic>false</italic>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>修改雷达和接受端信息</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>86</y>
+      <width>160</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <italic>false</italic>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>验证与雷达的通信</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="OperateOut">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>470</y>
+      <width>631</width>
+      <height>131</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logo">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>35</y>
+      <width>800</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>logo.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LiDARMac_label">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>300</y>
+      <width>103</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tlwg Mono</family>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
+    <property name="text">
+     <string>Mac Adr:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LiDARMac1">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>300</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LiDARMac2">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>300</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LiDARMac4">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>300</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LiDARMac3">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>300</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LiDARMac6">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>300</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LiDARMac5">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>300</y>
+      <width>61</width>
+      <height>27</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Macsline_1">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>300</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Macsline_2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>300</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Macsline_3">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>300</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Macsline_4">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>300</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Macsline_5">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>300</y>
+      <width>10</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>OriLiDARIP1</tabstop>
+  <tabstop>OriLiDARIP2</tabstop>
+  <tabstop>OriLiDARIP3</tabstop>
+  <tabstop>OriLiDARIP4</tabstop>
+  <tabstop>OriLiDARPort</tabstop>
+  <tabstop>OriHOSTIP1</tabstop>
+  <tabstop>OriHOSTIP2</tabstop>
+  <tabstop>OriHOSTIP3</tabstop>
+  <tabstop>OriHOSTIP4</tabstop>
+  <tabstop>OriHOSTPort</tabstop>
+  <tabstop>Check</tabstop>
+  <tabstop>LiDARMac1</tabstop>
+  <tabstop>LiDARMac2</tabstop>
+  <tabstop>LiDARMac3</tabstop>
+  <tabstop>LiDARMac4</tabstop>
+  <tabstop>LiDARMac5</tabstop>
+  <tabstop>LiDARMac6</tabstop>
+  <tabstop>NewLiDARIP1</tabstop>
+  <tabstop>NewLiDARIP2</tabstop>
+  <tabstop>NewLiDARIP3</tabstop>
+  <tabstop>NewLiDARIP4</tabstop>
+  <tabstop>NewLiDARPort</tabstop>
+  <tabstop>NewHOSTIP1</tabstop>
+  <tabstop>NewHOSTIP2</tabstop>
+  <tabstop>NewHOSTIP3</tabstop>
+  <tabstop>NewHOSTIP4</tabstop>
+  <tabstop>NewHOSTPort</tabstop>
+  <tabstop>SetIP</tabstop>
+  <tabstop>OperateOut</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>
