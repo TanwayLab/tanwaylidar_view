@@ -19,6 +19,11 @@ bool TanwayLidarBase::Initialize(ros::NodeHandle& nh, LaunchConfig& config)
 	m_startAngle = config.m_startAngle;
 	m_endAngle = config.m_endAngle;
 
+	if (config.m_host.empty() || config.m_lidarhost.empty() || config.m_localPort<0 || config.m_lidarPort<0)
+	{
+		return false;
+	}
+	
 	//初始化UDP
 	return m_UDPNetwork.Init(config.m_host, config.m_localPort, config.m_lidarhost, config.m_lidarPort);
 
@@ -32,7 +37,7 @@ bool TanwayLidarBase::GetUDP()
 	{
 		return false;
 	}
-	
+
 	AnalysisUDPData();
 
 	return true;

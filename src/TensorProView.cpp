@@ -49,6 +49,10 @@ void TensorProView::AnalysisUDPData()
 			//重置分帧标志
 			m_needPublishCloud = true;
 
+			//计算临时变量值
+			m_cos_hA_RA = cos(horAngle * RA);
+			m_sin_hA_RA = sin(horAngle * RA);
+
 			int seq = 0;
 			while (seq < 16) 
 			{
@@ -85,20 +89,20 @@ void TensorProView::AnalysisUDPData()
 void TensorProView::UseAnalysisPoint(float horAngle, float hexL, int channel, float hexPulseWidth, int offset)
 {
 
- 	float cos_hA_RA = cos(horAngle * RA);
-	float sin_hA_RA = sin(horAngle * RA);
+ 	//float cos_hA_RA = cos(horAngle * RA);
+	//float sin_hA_RA = sin(horAngle * RA);
 	float vA = verticalChannels[channel-1];
 	float cos_vA_RA = cos(vA * RA);
-	float L = hexL*500*c/10.f/16384.f/2;
-	float pulseWidth = hexPulseWidth*500*c/10.f/16384.f/2;
+	float L = hexL*m_tmpCal;
+	float pulseWidth = hexPulseWidth*m_tmpCal;
 
 	//距离过滤
 	if (L<=0 || L > 200)  return;
 	
 	//创建点
 	TanwayViewPoint point;
-	point.x = L * cos_vA_RA * cos_hA_RA;
-	point.y = L * cos_vA_RA * sin_hA_RA;
+	point.x = L * cos_vA_RA * m_cos_hA_RA;
+	point.y = L * cos_vA_RA * m_sin_hA_RA;
 	point.z = L * sin(vA * RA);
 	point.pulsewidth = pulseWidth;
 

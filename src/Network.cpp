@@ -41,6 +41,7 @@ bool UDPNetwork::Init(std::string host_, int port_, std::string LiDARhost_, int 
 	if (status)
 		ROS_INFO("Connect with LiDAR !");
 
+
 	return status;
 
 }

@@ -70,7 +70,16 @@ int main(int argc, char** argv)
 
 	while (ros::ok())
 	{
+		struct timeval tv0;
+		gettimeofday(&tv0,NULL);
+		printf("--------------------------------------: %ld - %ld\n",tv0.tv_sec, tv0.tv_usec);  //微秒
+
 		pLidarBase->GetUDP();
+
+		struct timeval tv1;
+		gettimeofday(&tv1,NULL);
+		printf("++++++++++++++++++++++++++++++++++++++: %ld - %ld\n",tv1.tv_sec, tv1.tv_usec);  //微秒
+		printf("use time: %ld\n",(tv1.tv_sec - tv0.tv_sec)*1000000 + (tv1.tv_usec - tv0.tv_usec));  //微秒
 	}
 
 	delete pLidarBase;

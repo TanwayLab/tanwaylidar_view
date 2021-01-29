@@ -32,6 +32,12 @@ public:
  	bool m_timestampPrintSwitch = false;
 
 protected:
+	double RA = 0.01745329;//deg to rad. 180/pi
+	double c = 2.997924;
+	double m_cos_hA_RA = 0;
+	double m_sin_hA_RA = 0;
+	double m_tmpCal = 500*c/10.f/16384.f/2;
+
 	u_char m_buf[1500];
 	int m_lengthBuf = 0;
 	ros::Publisher m_rosPublisher;
