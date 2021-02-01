@@ -7,7 +7,7 @@
  *  Author: Elodie Shan
  *  Editor: LF Shen
 
- *  Node for Tanway Tensor 3D LIDARs   
+ *  Node for Tanway Tensor 3D LIDARs
  *  Function: 20lines one bag-->switch:cout flag state
 **************************************************/
 
@@ -71,7 +71,7 @@ void ScopeView::AnalysisUDPData()
 				float hexPulseWidth2 = TwoHextoInt(m_buf[offset + seq * 8 + 6], m_buf[offset + seq * 8 + 7]);
 
 				//通道	
-				int channel = 16 * (blocks_num >= 4? blocks_num-4:blocks_num) + seq + 1;
+				int channel = 65 - (16 * (blocks_num >= 4? blocks_num-4:blocks_num) + seq + 1);
 				
 				//计算点数据
 				UseAnalysisPoint(1, sepIndex, faceIndex, horAngle, channel, hexL1, hexPulseWidth1);
