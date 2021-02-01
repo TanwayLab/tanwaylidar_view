@@ -1,3 +1,14 @@
+/************************************************
+ *  Copyright (C) 2020 Tanway Technology Co., Ltd
+ *  License:　BSD 3-Clause License
+ *
+ *  Created on: 16-01-2021
+ *  Edited on: 30-01-2021
+ *  Author: LN
+
+ *  Point cloud data structure definition for view project   
+**************************************************/
+
 #ifndef TANWAYVIEWPOINTTYPE_H_
 #define TANWAYVIEWPOINTTYPE_H_
 

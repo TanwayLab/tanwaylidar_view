@@ -1,4 +1,15 @@
 
+/************************************************
+ *  Copyright (C) 2020 Tanway Technology Co., Ltd
+ *  License:　BSD 3-Clause License
+ *
+ *  Created on: 16-01-2021
+ *  Edited on: 30-01-2021
+ *  Author: LN
+
+ *  Data processing base class for Tanway all LIDARs   
+**************************************************/
+
 #ifndef TANWAYLIDARBASE_H_
 #define TANWAYLIDARBASE_H_
 
@@ -41,6 +52,7 @@ protected:
 	u_char m_buf[1500];
 	int m_lengthBuf = 0;
 	ros::Publisher m_rosPublisher;
+	std::string m_frameID;
 
 private:
 	UDPNetwork m_UDPNetwork;

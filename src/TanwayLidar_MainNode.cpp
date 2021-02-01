@@ -2,10 +2,9 @@
  *  Copyright (C) 2020 Tanway Technology Co., Ltd
  *  License:　BSD 3-Clause License
  *
- *  Created on: 16-07-2019
- *  Edited on: 31-05-2020
- *  Author: Elodie Shan
- *  Editor: LF Shen
+ *  Created on: 16-01-2021
+ *  Edited on: 30-01-2021
+ *  Author: LN
 
  *  Node for Tanway 3D LIDARs   
 **************************************************/
@@ -26,13 +25,10 @@ int main(int argc, char** argv)
 
 	ros::NodeHandle nh_private("~");
 
-
 	ROS_INFO( "tanway lidar viewer for ROS" );
-	ROS_INFO( "Version 2.0.0" );
-	ROS_INFO( "Update Date: 2020/06/20\n" );
-
-	//ROS_INFO( "View in rviz;");
-	//ROS_INFO( "topic= tensorpro_cloud and fixed frame= TanwayTP");
+	ROS_INFO( "Version 1.0.1" );
+	ROS_INFO( "Update Date: 2021/02/01\n" );
+	ROS_INFO( "View in rviz;");
 
 	//读取Launch配置文件
 	LaunchConfig launchConfig;
@@ -45,12 +41,12 @@ int main(int argc, char** argv)
 		case LaunchConfig::LT_Tensor_Lite:
 		case LaunchConfig::LT_Tensor_Pro:
 			ROS_INFO( "[Run Info]--: Run Lidar Type: Tensor_Pro\n");
-			pLidarBase = new TensorProView;
+			pLidarBase = new TensorProView();
 			break;
 		
 		case LaunchConfig::LT_Scope:
 			ROS_INFO( "[Run Info]--: Run Lidar Type: Scope(Beta)\n");
-			pLidarBase = new ScopeView;
+			pLidarBase = new ScopeView();
 			break;
 
 		default:
@@ -70,16 +66,7 @@ int main(int argc, char** argv)
 
 	while (ros::ok())
 	{
-		struct timeval tv0;
-		gettimeofday(&tv0,NULL);
-		printf("--------------------------------------: %ld - %ld\n",tv0.tv_sec, tv0.tv_usec);  //微秒
-
 		pLidarBase->GetUDP();
-
-		struct timeval tv1;
-		gettimeofday(&tv1,NULL);
-		printf("++++++++++++++++++++++++++++++++++++++: %ld - %ld\n",tv1.tv_sec, tv1.tv_usec);  //微秒
-		printf("use time: %ld\n",(tv1.tv_sec - tv0.tv_sec)*1000000 + (tv1.tv_usec - tv0.tv_usec));  //微秒
 	}
 
 	delete pLidarBase;

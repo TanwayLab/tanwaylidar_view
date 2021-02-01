@@ -2,13 +2,11 @@
  *  Copyright (C) 2020 Tanway Technology Co., Ltd
  *  License:　BSD 3-Clause License
  *
- *  Created on: 16-07-2019
- *  Edited on: 31-05-2020
- *  Author: Elodie Shan
- *  Editor: LF Shen
+ *  Created on: 16-01-2021
+ *  Edited on: 30-01-2021
+ *  Author: LN
 
- *  Node for Tanway Tensor 3D LIDARs   
- *  Function: 20lines one bag-->switch:cout flag state
+ *  Data processing for Tanway TensorPro LIDARs   
 **************************************************/
 
 #include <ros/ros.h> //generic C++ stuff
@@ -72,8 +70,6 @@ void TensorProView::AnalysisUDPData()
 			}
 
 		}
-		//else
-		//	ROS_DEBUG("hA = [%f]",horAngle);
 
 		if (horAngle < m_startAngle && m_needPublishCloud)
 		{
@@ -88,15 +84,12 @@ void TensorProView::AnalysisUDPData()
 
 void TensorProView::UseAnalysisPoint(float horAngle, float hexL, int channel, float hexPulseWidth, int offset)
 {
-
- 	//float cos_hA_RA = cos(horAngle * RA);
-	//float sin_hA_RA = sin(horAngle * RA);
 	float vA = verticalChannels[channel-1];
 	float cos_vA_RA = cos(vA * RA);
 	float L = hexL*m_tmpCal;
 	float pulseWidth = hexPulseWidth*m_tmpCal;
 
-	//距离过滤
+	//按有效距离过滤
 	if (L<=0 || L > 200)  return;
 	
 	//创建点
@@ -114,15 +107,12 @@ void TensorProView::PublishCloud()
 	//更新点云帧基础数据	
 	m_tanwayViewPointCloud->width = (int) m_tanwayViewPointCloud->points.size(); //Number of points in one frame
 	m_tanwayViewPointCloud->height = 1; // Whether the point cloud is orderly, 1 is disordered
-	m_tanwayViewPointCloud->header.frame_id = "TanwayTP"; //Point cloud coordinate system name
-	ROS_DEBUG( "Publish   num: [%d]",(int) m_tanwayViewPointCloud->points.size());
-
-  
+	m_tanwayViewPointCloud->header.frame_id = m_frameID; //Point cloud coordinate system name
+	
 	pcl::toROSMsg(*m_tanwayViewPointCloud, m_rosPointCloud); //convert between PCL and ROS datatypes
 	m_rosPointCloud.header.stamp = ros::Time::now(); //Get ROS system time
 	m_rosPublisher.publish(m_rosPointCloud); //Publish cloud
 	
-
 	TanwayViewPointCloud cloud;
 	m_tanwayViewPointCloud = cloud.makeShared();
 }

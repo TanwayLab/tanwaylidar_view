@@ -1,20 +1,23 @@
 <launch>
-  <arg name="host" default="192.168.111.204" />
-  <arg name="frame_id" default="TanwayTP" />
+	<!--本机IP地址-->
+	<arg name="host" default="192.168.111.204" />
+	<arg name="frame_id" default="TanwayTP" />
 
-  <node pkg="tanwaylidar_view" name="TanwayLidar_MainNode" type="TanwayLidar_MainNode" output = "screen">
-    <param name="host" value="$(arg host)" />
-    <param name="frame_id" value="$(arg frame_id)" />
+	<node pkg="tanwaylidar_view" name="TanwayLidar_MainNode" type="TanwayLidar_MainNode" output = "screen">
+		<param name="host" value="$(arg host)" />
+		<param name="frame_id" value="$(arg frame_id)" />
+		<param name="LidarType" type="int" value="2"/> 
 
-    <param name="port"  type="int" value="5600" />
-    <param name="LiDARport"  type="int" value="5050" />
-    <param name="LiDARhost"  type="string" value="192.168.111.51" />
-    <param name="StartAngle"  type="double" value="30" />
-    <param name="EndAngle"  type="double" value="150" />
+		<!--本机接收雷达数据的端口号-->
+		<param name="port" type="int" value="5600" />
+		<!--雷达设备的IP地址-->
+		<param name="LiDARhost" type="string" value="192.168.111.51" />
+		<!--雷达设备发送端的端口号-->
+		<param name="LiDARport" type="int" value="5050" />
+		<!--雷达数据的有效⻆度范围-->
+		<param name="StartAngle" type="double" value="30" />
+		<param name="EndAngle" type="double" value="150" />
+	</node>
 
-    <param name="LidarType" type="int" value="2"/> 
-
-   </node>
-
-   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tanwaylidar_view)/rviz/tanwayrun.rviz" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find tanwaylidar_view)/rviz/tanwayrun.rviz" />
 </launch>

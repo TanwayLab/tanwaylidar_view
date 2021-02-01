@@ -2,9 +2,10 @@
  *  Copyright (C) 2020 Tanway Technology Co., Ltd
  *  License:　BSD 3-Clause License
  *
- *  Created on: 16-07-2019
- *  Author: Elodie Shan
- *
+ *  Created on: 16-01-2021
+ *  Edited on: 30-01-2021
+ *  Author: LN
+
  *  UDP interface for Tanway Tensor 3D LIDARs
 **************************************************/
 

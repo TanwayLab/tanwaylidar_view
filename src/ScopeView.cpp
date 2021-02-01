@@ -2,14 +2,13 @@
  *  Copyright (C) 2020 Tanway Technology Co., Ltd
  *  License:　BSD 3-Clause License
  *
- *  Created on: 16-07-2019
- *  Edited on: 31-05-2020
- *  Author: Elodie Shan
- *  Editor: LF Shen
+ *  Created on: 16-01-2021
+ *  Edited on: 30-01-2021
+ *  Author: LN
 
- *  Node for Tanway Tensor 3D LIDARs
- *  Function: 20lines one bag-->switch:cout flag state
+ *  Data processing for Tanway Scope LIDARs   
 **************************************************/
+
 
 #include <ros/ros.h> //generic C++ stuff
 #include <pcl_ros/point_cloud.h> //use these to convert between PCL and ROS datatypes
@@ -116,13 +115,9 @@ void ScopeView::UseAnalysisPoint(int echo, int sepIndex, int faceIndex, float ho
 void ScopeView::PublishCloud()
 {
 	//更新点云帧基础数据	
-	std::cout << "frame points count: %d" <<m_tanwayViewPointCloud->points.size() << std::endl;
-	
 	m_tanwayViewPointCloud->width = (int) m_tanwayViewPointCloud->points.size(); //Number of points in one frame
 	m_tanwayViewPointCloud->height = 1; // Whether the point cloud is orderly, 1 is disordered
-	m_tanwayViewPointCloud->header.frame_id = "TanwayTP"; //Point cloud coordinate system name
-	ROS_DEBUG( "Publish   num: [%d]",(int) m_tanwayViewPointCloud->points.size());
-
+	m_tanwayViewPointCloud->header.frame_id = m_frameID; //Point cloud coordinate system name
   
 	pcl::toROSMsg(*m_tanwayViewPointCloud, m_rosPointCloud); //convert between PCL and ROS datatypes
 	m_rosPointCloud.header.stamp = ros::Time::now(); //Get ROS system time

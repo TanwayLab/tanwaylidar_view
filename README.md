@@ -1,5 +1,5 @@
-# tensorpro_view
-TensorPro_PC_v1.1.6_2020622是探维科技TensorPro系列产品的上位机软件，在Ubuntu18.04环境下开发测试通过。
+# tanwaylidar_view
+tanwaylidar_view 是探维科技针对所产雷达系列产品的上位机软件，在Ubuntu18.04环境下开发测试通过。
 
 软件需在ROS环境下使用，ROS安装参见[安装教程](http://wiki.ros.org/ROS/Installation "")。
 
@@ -19,28 +19,28 @@ TensorPro_PC_v1.1.6_2020622是探维科技TensorPro系列产品的上位机软�
 1. 创建ROS工作空间
 
 ```bash
-mkdir -p ~/tensorpro_driver/src
-cd ~/tensorpro_driver/src
+mkdir -p ~/tanwaylidar_driver/src
+cd ~/tanwaylidar_driver/src
 ```
 
 1. 下载代码
 
 ```bash
-git clone https://github.com/TanwayLab/tensorpro_view.git
+git clone https://github.com/TanwayLab/tanwaylidar_view.git
 ```
 
-输入用户名密码，下载成功后，～/tensorpro_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到/tensorpro_driver/src文件夹下。
+输入用户名密码，下载成功后，～/tanwaylidar_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到/tanwaylidar_driver/src文件夹下。
 
 1. 编译程序
 
 ```bash
-cd ~/tensorpro_driver && catkin_make
+cd ~/tanwaylidar_driver && catkin_make
 ```
 
 1. 设置环境变量
 
 ```bash
-echo "source ~/tensorpro_driver/devel/setup.bash" >> ~/.bashrc
+echo "source ~/tanwaylidar_driver/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -48,10 +48,11 @@ source ~/.bashrc
 
 1. 修改电脑IP为与雷达通信的IP，默认为"192.168.111.204"
 
-1. 正常查看点云
+1. 运行程序，正常查看点云
 
 ```bash
-roslaunch tensorpro_view Tensorpro.launch
+【以TensorPro设备为例】roslaunch tanwaylidar_view TensorPro.launch
+【以Scope设备为例】roslaunch tanwaylidar_view Scope.launch
 ```
 
 ![](./resource/pic/example.png "")
@@ -60,7 +61,7 @@ roslaunch tensorpro_view Tensorpro.launch
 # IP修改工具使用
 
 ```bash
-rosrun tensorpro_view tensorpro_interfaces
+rosrun tanwaylidar_view tensorpro_interfaces
 ```
 
 弹出用户交互界面如下,
@@ -110,9 +111,9 @@ rosrun tensorpro_view tensorpro_interfaces
 
 ## 历史软件版本描述
 
-| 版本号             | 时间          | 描述     | 
+| 版本号             | 时间          | 描述     |
 | ---------------------| ----------------- | ---------- |
-| tensorpro_view v1.1.5 | 2020年6月1日 | 解析UDP数据包并发布为PointCloud2数据格式 | 
-| tensorpro_view v1.1.6 | 2020年6月22日 | 修改buf数据类型为u_char | 
+| tanwaylidar_view v1.0.0 | 2021年01月20日 | 增加对Scope设备的支持，用于测试使用 |
+| tanwaylidar_view v1.0.1 | 2021年02月01日 | 通道号翻转修改（仅Scope设备）<br />运行参数提示信息错误<br />ReadMe描述错误<br />其他已知BUG |
 
 

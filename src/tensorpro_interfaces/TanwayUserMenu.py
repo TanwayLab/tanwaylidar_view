@@ -5,7 +5,7 @@
 #  License:　BSD 3-Clause License
 #
 ## Version: V1.2
-## Author: Elodie Shan
+## Author: LN
 ## Editor: LF Shen
 ## Updated Date: 2019-11-26
 ## Function: Check connnection state and set IP for Tensor-Pro Lidar
@@ -32,7 +32,7 @@ class MyWindow(QMainWindow):
         super(MyWindow, self).__init__()
 
         # Get path to UI file which should be in the "resource" folder of this package
-        self.ui_file = os.path.join(rospkg.RosPack().get_path('tensorpro_view'), 'resource', 'InterfaceGUI.ui')
+        self.ui_file = os.path.join(rospkg.RosPack().get_path('tanwaylidar_view'), 'resource', 'InterfaceGUI.ui')
         loadUi(self.ui_file, self)
         self.setObjectName('ConfigMenu')
 
