@@ -40,7 +40,6 @@ public:
 	int m_lidarPort = -1;	
 	double m_startAngle = 30;
 	double m_endAngle = 150;
-	bool m_timestampPrintSwitch = false; //GPS时间戳
 
 	LidarType m_lidarType;
 };

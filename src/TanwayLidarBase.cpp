@@ -10,6 +10,7 @@
 **************************************************/
 
 #include <sensor_msgs/PointCloud2.h> //ROS message type to publish a pointCloud
+#include <pthread.h>
 #include <TanwayLidarBase.h>
 
 TanwayLidarBase::TanwayLidarBase()
@@ -18,7 +19,8 @@ TanwayLidarBase::TanwayLidarBase()
 
 TanwayLidarBase::~TanwayLidarBase()
 {
-
+	if (thread_tids != -1)
+		pthread_cancel(thread_tids);
 }
 
 
@@ -36,13 +38,19 @@ bool TanwayLidarBase::Initialize(ros::NodeHandle& nh, LaunchConfig& config)
 	}
 	
 	//初始化UDP
-	return m_UDPNetwork.Init(config.m_host, config.m_localPort, config.m_lidarhost, config.m_lidarPort);
+	bool bRet = m_UDPNetwork.Init(config.m_host, config.m_localPort, config.m_lidarhost, config.m_lidarPort);
 
+	if (bRet)
+	{
+		int bTRet = pthread_create(&thread_tids, NULL, TanwayLidarBase::GetGPS, this );  
+	}
+	
+	return bRet;
 }
 
 bool TanwayLidarBase::GetUDP()
 {
-	m_lengthBuf = m_UDPNetwork.recvUDP(m_buf);
+	m_lengthBuf = m_UDPNetwork.recvPoint(m_buf);
 
 	if (m_lengthBuf < 0) //Recieve UDP packets
 	{
@@ -52,6 +60,21 @@ bool TanwayLidarBase::GetUDP()
 	AnalysisUDPData();
 
 	return true;
+}
+
+void* TanwayLidarBase::GetGPS(void* args)
+{
+	TanwayLidarBase* pThis = (TanwayLidarBase*)args;
+
+	while(1)
+	{
+		pThis->m_lengthBufGPS = pThis->m_UDPNetwork.recvGPS(pThis->m_bufGPS);
+
+		if (pThis->m_lengthBufGPS <= 0)
+			continue;
+		pThis->AnalysisGPSData();
+	}
+	return ((void *)0);
 }
 
 void TanwayLidarBase::SetBufferAndAnalysis(u_char* data, int len)

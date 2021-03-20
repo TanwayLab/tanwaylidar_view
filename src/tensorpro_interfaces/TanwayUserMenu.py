@@ -11,7 +11,7 @@
 ## Function: Check connnection state and set IP for Tensor-Pro Lidar
 
 from python_qt_binding import loadUi
-from python_qt_binding.QtWidgets import QMainWindow
+from python_qt_binding.QtWidgets import QMainWindow,QApplication
 from python_qt_binding.QtGui import QTextCursor
 
 import os
@@ -55,26 +55,24 @@ class MyWindow(QMainWindow):
     def check_button(self):
         if self.check_flag == 0:
             self.check_flag = 1
-            self.Check.setText("结束")
-            # Put start button code here
-            self.get_card_bytes_info()
-
-    def changeCheckButton_status(self):
-        self.check_flag = 0
-        self.Check.setText("连接雷达")
-        self.OperateOut.insertPlainText("\n")
+            self.Check.setText("检测中...")
+            # begin connect
+            self.CheckConnection()
+            # reset button status
+            self.check_flag = 0
+            self.Check.setText("测试雷达连接")
+            self.OperateOut.insertPlainText("\n")
 
     def setIP_button(self):
         if self.ip_flag == 0:
             self.ip_flag = 1
-            self.SetIP.setText("结束")
-            # Put start button code here
+            self.SetIP.setText("修改中...")
+            # begin change
             self.IPSetting()
-
-    def changeIPButton_status(self):
-        self.ip_flag = 0
-        self.SetIP.setText("确定修改")
-        self.OperateOut.insertPlainText("\n")
+            # reset button status
+            self.ip_flag = 0
+            self.SetIP.setText("修改配置")
+            self.OperateOut.insertPlainText("\n")
 
     def output_msg(self,text_window,text):
         cursor =  text_window.textCursor()
@@ -87,14 +85,14 @@ class MyWindow(QMainWindow):
             try:
                 p = int(port)
             except:
-                self.output_msg(self.OperateOut, "端口输入有误，请检查所填信息．\n")
+                self.output_msg(self.OperateOut, "【错误】端口输入有误，请检查本机网卡IP和【HOST IP】信息是否一致。\n")
                 return -1
             if p < 1 or p > 65535:
-                self.output_msg(self.OperateOut,"端口需在0~65535范围内,请更改.\n") 
+                self.output_msg(self.OperateOut,"【错误】端口需在0~65535范围内,请更改。\n") 
                 return -1
             return 0
         else:
-            self.output_msg(self.OperateOut,"IP地址输入有误,请检查所填信息.\n")
+            self.output_msg(self.OperateOut,"【错误】IP地址输入有误,请检查所填信息。\n")
             return -1
 
     def checkIPLegality(self):
@@ -102,10 +100,10 @@ class MyWindow(QMainWindow):
         hostip = self.NewHostIP.split(".")
         for i in range(3):
             if lidarip[i] != hostip[i]:
-                self.output_msg(self.OperateOut,"雷达和主机需在同一网段内,否则无法通信.\n")
+                self.output_msg(self.OperateOut,"【错误】雷达和主机需在同一网段内,否则无法通信。\n")
                 return -1
         if lidarip[3] == hostip[3]:
-            self.output_msg(self.OperateOut,"雷达和主机的IP不可重复,请检查所填信息.\n")
+            self.output_msg(self.OperateOut,"【错误】雷达和主机的IP不可重复,请检查所填信息。\n")
             return -1
         return 0
 
@@ -113,7 +111,7 @@ class MyWindow(QMainWindow):
         if re.match(r"^\s*([0-9a-fA-F]{2,2}:){5,5}[0-9a-fA-F]{2,2}\s*$", mac):
             return 0    
         else:
-            self.output_msg(self.OperateOut,"Mac地址输入有误，请检查所填信息．\n")
+            self.output_msg(self.OperateOut,"【错误】Mac地址输入有误，请检查所填信息。\n")
             return -1
 
     def getMacInfo(self):
@@ -129,7 +127,7 @@ class MyWindow(QMainWindow):
         self.OriLidarport = self.OriLiDARPort.text()
 
         if self.OriHostIP == "" or self.OriHostport=="" or self.OriLidarIP == "" or self.OriLidarport=="":
-           self.output_msg(self.OperateOut,"请先验证雷达通信情况，并输入完整的IP和端口信息.\n")
+           self.output_msg(self.OperateOut,"【错误】输入的IP地址或端口号不符合规则，请检查所填信息。\n")
            return -1
 
         if self.checkInfoLegality(self.OriHostIP,self.OriHostport)==-1 or self.checkInfoLegality(self.OriLidarIP,self.OriLidarport)==-1:
@@ -148,97 +146,135 @@ class MyWindow(QMainWindow):
         return 0
 
     def CheckConnection(self):
+        self.output_msg(self.OperateOut,"【提示】正在准备连接，请稍候...\n")
+        QApplication.processEvents()
         if self.getOriInfo()==-1:
-           self.changeCheckButton_status()
            return -1
-        self.output_msg(self.OperateOut,"正在尝试接收雷达数据，请稍候...\n")
+        self.output_msg(self.OperateOut,"【提示】正在尝试接收雷达数据，请稍候...\n")
         udp_socket_recv = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        udp_socket_recv.settimeout(10)
+        udp_socket_recv.settimeout(5)
         ip_port = (self.OriHostIP , int(self.OriHostport))
 
         try:
             udp_socket_recv.bind(ip_port) 
         except:
-            self.output_msg(self.OperateOut,"无法与本地的IP端口绑定，请检查所填信息！\n") 
+            self.output_msg(self.OperateOut,"【错误】无法与本地的IP端口绑定，请检查所填信息！\n") 
             udp_socket_recv.close()
-            self.changeCheckButton_status()
             return -1
         n = 0
         while n<5:
             try:
                 msg, addr = udp_socket_recv.recvfrom(1500)
             except socket.timeout:
-                self.output_msg(self.OperateOut,"主机无法接收雷达数据，请检查网络设置！\n")
+                self.output_msg(self.OperateOut,"【失败】未接收到雷达数据，请检查网络配置是否正确！\n")
                 udp_socket_recv.close()
-                self.changeCheckButton_status()
                 return -1    
-            time.sleep(0.1)
             n += 1    
-        text = "收到来自"+str(addr[0])+":"+str(addr[1])+"的信息,长度为"+str(len(msg))+"．\n"
+        text = "【提示】收到来自"+str(addr[0])+":"+str(addr[1])+"的信息,长度为"+str(len(msg))+"。\n"
         self.OperateOut.insertPlainText(text)
         if str(addr[0])!=self.OriLidarIP or str(addr[1])!=self.OriLidarport:
-            self.output_msg(self.OperateOut,"数据来源与所填信息不符，请检查信息！\n")
+            self.output_msg(self.OperateOut,"【失败】数据来源与所填雷达连接信息不符，请修正雷达连接信息！\n")
         else:
-            self.output_msg(self.OperateOut,"雷达数据传输正常，请继续操作．\n")
+            self.output_msg(self.OperateOut,"【成功】连接雷达成功！雷达数据传输正常，请继续操作。\n")
         udp_socket_recv.close()
-        self.changeCheckButton_status()
 
     def IPSetting(self):
+        self.output_msg(self.OperateOut,"【提示】正在准备修改，请稍候...\n")
+        QApplication.processEvents()
         if self.getMacInfo()==-1 or self.getOriInfo()==-1 or self.getNewInfo()==-1 or self.checkIPLegality() == -1:
-            self.changeIPButton_status()
             return -1
         try:
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            ip_port = (self.OriHostIP , int(self.OriHostport))
+            ip_port = (self.OriHostIP , 6677)
             client_socket.bind(ip_port) 
         except:
-            self.output_msg(self.OperateOut,"无法与本地的IP端口绑定，请检查所填信息！\n")
+            self.output_msg(self.OperateOut,"【错误】无法与本地的IP端口绑定，请检查所填信息！\n")
             client_socket.close()
-            self.changeIPButton_status()
             return -1
 
-        #add_mac = "gnome-terminal --disable-factory -- /bin/sh -c 'sudo arp -s " + self.OriLidarIP + " " + self.LiDARMac + " && arp -a '"
-        add_mac = "gnome-terminal --disable-factory -- /bin/sh -c 'sudo arp -a " + self.OriLidarIP + " -s " + self.OriLidarIP + " " + self.LiDARMac + "'" 
-    
-        if os.system(add_mac)>0:
-            self.changeIPButton_status()
-            return -1
 
-        carray = [0xc0,0xa8,0x6f,0x33,0xc1,0xc1,0x13,0xba,0xc0,0xa8,0x6f,0xcc,0xa1,0xa1,0x15,0xe0]
-        
-        carray[0] = int(str(self.NewLiDARIP1.text()))
-        carray[1] = int(str(self.NewLiDARIP2.text()))
-        carray[2] = int(str(self.NewLiDARIP3.text()))
-        carray[3] = int(str(self.NewLiDARIP4.text()))
+        carray = [0x00]*100 
 
-        carray[6] = ((int(str(self.NewLidarport)))>>8)
-        carray[7] = ((int(str(self.NewLidarport)))&255)
+        carray[0] = 0xFF
+        carray[1] = 0xEE
+        carray[2] = (100>>8)
+        carray[3] = (100&255)
+        carray[4] = 0x01
+        carray[5] = 0x00
+        carray[6] = 0x00 #改IP
+        carray[7] = 0x01 
+        #指定要操作的雷达
+        #IP
+        carray[8] = int(str(self.OriLiDARIP1.text()))
+        carray[9] = int(str(self.OriLiDARIP2.text()))
+        carray[10] = int(str(self.OriLiDARIP3.text()))
+        carray[11] = int(str(self.OriLiDARIP4.text()))
+        #MAC
+        carray[12] = int(str(self.LiDARMac1.text()), 16)
+        carray[13] = int(str(self.LiDARMac2.text()), 16)
+        carray[14] = int(str(self.LiDARMac3.text()), 16)
+        carray[15] = int(str(self.LiDARMac4.text()), 16)
+        carray[16] = int(str(self.LiDARMac5.text()), 16)
+        carray[17] = int(str(self.LiDARMac6.text()), 16)
 
-        carray[8] = int(str(self.NewHOSTIP1.text()))
-        carray[9] = int(str(self.NewHOSTIP2.text()))
-        carray[10] = int(str(self.NewHOSTIP3.text()))
-        carray[11] = int(str(self.NewHOSTIP4.text()))
+        #new lidar ip
+        carray[18] = int(str(self.NewLiDARIP1.text()))
+        carray[19] = int(str(self.NewLiDARIP2.text()))
+        carray[20] = int(str(self.NewLiDARIP3.text()))
+        carray[21] = int(str(self.NewLiDARIP4.text()))
+        #new lidar port
+        carray[22] = ((int(str(self.NewLidarport)))>>8)
+        carray[23] = ((int(str(self.NewLidarport)))&255)
+        #new dest ip
+        carray[24] = int(str(self.NewHOSTIP1.text()))
+        carray[25] = int(str(self.NewHOSTIP2.text()))
+        carray[26] = int(str(self.NewHOSTIP3.text()))
+        carray[27] = int(str(self.NewHOSTIP4.text()))
+        #new dest port
+        carray[28] = ((int(str(self.NewHostport)))>>8)
+        carray[29] = ((int(str(self.NewHostport)))&255)
 
-        carray[14] = ((int(str(self.NewHostport)))>>8)
-        carray[15] = ((int(str(self.NewHostport)))&255)
+        carray[30] = 0xAA
+        carray[31] = 0xBB
 
         msg = struct.pack("%dB" % (len(carray)), *carray)
 
         try:
-            client_socket.sendto(msg, (self.OriLidarIP , int(self.OriLidarport)))
+            client_socket_send = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            client_socket_send.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+            client_socket_send.sendto(msg, ('192.168.111.255' , int(self.OriLidarport)))
         except:
-            self.output_msg(self.OperateOut,"网络通信出错,请检查设置！\n")                                                   
-            client_socket.close()
-            self.changeIPButton_status()
+            self.output_msg(self.OperateOut,"【错误】发送数据包时出现错误，请检查网络配置！\n")                                                   
+            client_socket_send.close()
             return -1
+        #time.sleep(1)
+        self.output_msg(self.OperateOut,"【提示】命令已下发完成。\n")
+        QApplication.processEvents()   
+        #recv udp to check lidar status
+        client_socket.settimeout(10)
         time.sleep(1)
+
+        try:
+            msg, addr = client_socket.recvfrom(1500)
+        except socket.timeout:
+            self.output_msg(self.OperateOut,"【失败】主机未接收到雷达反馈信息，请检查雷达MAC地址、网络设置是否正确配置或重试！\n")
+            client_socket.close()
+            return -1    
+
+        if len(msg) == 100:
+            if msg[5].encode('hex') == '00':
+                self.output_msg(self.OperateOut,"【成功】雷达修改操作成功，请重新启动雷达以应用最新配置！\n")
+            if msg[5].encode('hex') == '01':
+                self.output_msg(self.OperateOut,"【失败】雷达修改操作失败。\n")
+            if msg[5].encode('hex') == '02':
+                self.output_msg(self.OperateOut,"【失败】雷达修改操作超时，请重试！\n")
+        else:
+            self.output_msg(self.OperateOut,"【提示】未接收到有效的硬件设备的反馈信息，部分雷达型号没有反馈信息，请手动检查设备状态是否修改成功！\n")
+            
         client_socket.close()
-        self.output_msg(self.OperateOut,"操作完成!\n")
-        self.changeIPButton_status()
 
     def get_card_bytes_info(self):
         # bytes_sent
-        self.output_msg(self.OperateOut,"新的函数！\n") 
         try:
             card_ip = []
             card_io = []

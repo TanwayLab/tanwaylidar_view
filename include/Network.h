@@ -23,31 +23,33 @@
 class UDPNetwork
 {
 public:
-  UDPNetwork();
+	UDPNetwork();
+	virtual ~UDPNetwork();
 
-  virtual ~UDPNetwork();
 
-  socklen_t sockfd, ret, addrlen;
-  struct sockaddr_in saddr,caddr;
+	// @brief Initialize　some settings.
+	bool Init(std::string host_, int port_, std::string LiDARhost_, int LiDARport_);
 
-  u_char buf_[1500];
+	// @brief Get the Point data.
+	int recvPoint(u_char* buf);
 
-  std::string host;
-  int port;
-  std::string LiDARhost;
-  int LiDARport;
+	// @brief Get the GPS data.
+	int recvGPS(u_char* buf);
 
-  // @brief Initialize　some settings.
-  bool Init(std::string host_, int port_, std::string LiDARhost_, int LiDARport_);
+private:
+	// @brief Verify that the connection  is successful.
+	bool ConnectValid();
 
-  // @brief Verify that the connection  is successful.
-  bool ConnectValid();
+	// @brief Verify that the data source is correct.
+	bool SourceValid();
 
-  // @brief Verify that the data source is correct.
-  bool SourceValid();
+	socklen_t m_socketPoint;
+	socklen_t m_socketGPS;
 
-  // @brief Get the UDP data.
-  int recvUDP(u_char* buf);
+	std::string host;
+	int port;
+	std::string LiDARhost;
+	int LiDARport;
 
  };
 

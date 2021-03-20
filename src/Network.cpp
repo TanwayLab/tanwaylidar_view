@@ -25,74 +25,106 @@ bool UDPNetwork::Init(std::string host_, int port_, std::string LiDARhost_, int 
 	LiDARhost = LiDARhost_;
 	LiDARport = LiDARport_;
 
-	sockfd = socket(AF_INET,SOCK_DGRAM,0);
-	saddr.sin_family = AF_INET; //IPv4
-	saddr.sin_port = htons(port);
-	saddr.sin_addr.s_addr = inet_addr(host.data());//Convert between the binary IP address of the 32-bit network byte and the dotted decimal IP address
+	m_socketPoint = socket(AF_INET,SOCK_DGRAM,0);
 
-	ret = bind(sockfd,(struct sockaddr*)&saddr,sizeof(saddr)); //Assign a local name to an unnamed socket to establish a local bundle (host address/port number) for the socket.
+	struct sockaddr_in saddr_point;
+	saddr_point.sin_family = AF_INET; //IPv4
+	saddr_point.sin_port = htons(port);
+	saddr_point.sin_addr.s_addr = inet_addr(host.data());//Convert between the binary IP address of the 32-bit network byte and the dotted decimal IP address
+
+	int ret = bind(m_socketPoint,(struct sockaddr*)&saddr_point,sizeof(saddr_point)); //Assign a local name to an unnamed socket to establish a local bundle (host address/port number) for the socket.
 	if(ret < 0) 
 	{
-		perror("bind fail!");
+
+		perror("Bind data port fail!");
 		return false;
 	}
 
 	bool status = ConnectValid() && SourceValid();
 	if (status)
-		ROS_INFO("Connect with LiDAR !");
+	{
+		m_socketGPS = socket(AF_INET,SOCK_DGRAM,0);
 
+		struct sockaddr_in saddr_gps;
+		saddr_gps.sin_family = AF_INET; //IPv4
+		saddr_gps.sin_port = htons(10110); //固定GPS接收端口
+		saddr_gps.sin_addr.s_addr = inet_addr(host.data());//Convert between the binary IP address of the 32-bit network byte and the dotted decimal IP address
 
+		int ret = bind(m_socketGPS, (struct sockaddr*)&saddr_gps, sizeof(saddr_gps)); //Assign a local name to an unnamed socket to establish a local bundle (host address/port number) for the socket.
+		
+		if(ret < 0) 
+		{
+			perror("Bind gps port:10110 fail!");
+		}
+	}
+		
 	return status;
 
 }
 
 bool UDPNetwork::ConnectValid()
 {
-  int RECV_TIMEOUT_COUNT = 0;
-  fd_set readfds;
-  FD_ZERO(&readfds);
-  FD_SET(sockfd,&readfds);
-  struct timeval RECV_TIMEOUT;
-  RECV_TIMEOUT.tv_sec = 10;
-  while(select(sockfd+1,&readfds,NULL,NULL,&RECV_TIMEOUT)==0)//Listening to the state of the socket
-  {
-    if (RECV_TIMEOUT_COUNT == 5)
-      return false;
-    ROS_WARN("Failed to connect with LiDAR , time out!");
-    sleep(1);
-    RECV_TIMEOUT_COUNT++;
-    FD_ZERO(&readfds);
-    FD_SET(sockfd,&readfds);
-    RECV_TIMEOUT.tv_sec = 30;
-  } 
+	int RECV_TIMEOUT_COUNT = 0;
+	fd_set readfds;
+	FD_ZERO(&readfds);
+	FD_SET(m_socketPoint,&readfds);
+	struct timeval RECV_TIMEOUT;
+	RECV_TIMEOUT.tv_sec = 10;
+	while(select(m_socketPoint+1,&readfds,NULL,NULL,&RECV_TIMEOUT)==0)//Listening to the state of the socket
+	{
+		if (RECV_TIMEOUT_COUNT == 5)
+			return false;
+		ROS_WARN("Failed to connect with LiDAR , time out!");
+		sleep(1);
+		RECV_TIMEOUT_COUNT++;
+		FD_ZERO(&readfds);
+		FD_SET(m_socketPoint,&readfds);
+		RECV_TIMEOUT.tv_sec = 30;
+	} 
 
-  return true;
+	return true;
 }
 
 bool UDPNetwork::SourceValid()
 {
   // Check LiDAR data source
-  bzero(buf_,sizeof(buf_));
-  addrlen = sizeof(caddr);
+	u_char buf_[1500];
+	bzero(buf_,sizeof(buf_));
 
-  ret = recvfrom(sockfd,buf_,1500,0,(struct sockaddr*)&caddr,&addrlen); //Recieve UDP packet to update client address.
+	struct sockaddr_in saddr_point;
+	socklen_t addrlen = sizeof(saddr_point);
 
-  if (inet_ntoa(caddr.sin_addr)!= LiDARhost/* || htons(caddr.sin_port)!= LiDARport*/)
-  {
-    ROS_ERROR("Warn data source %s: %d.  The valid host is %s: %d ",(char *)inet_ntoa(caddr.sin_addr),htons(caddr.sin_port),LiDARhost.data(),LiDARport);
-    ROS_ERROR("Please check the LiDAR or the config file!");
-    return false; 
-  }
-  return true;
+	int ret = recvfrom(m_socketPoint, buf_, 1500, 0, (struct sockaddr*)&saddr_point, &addrlen); //Recieve UDP packet to update client address.
+
+	if (inet_ntoa(saddr_point.sin_addr)!= LiDARhost/* || htons(caddr.sin_port)!= LiDARport*/)
+	{
+		ROS_ERROR("Warn data source %s: %d.  The valid host is %s: %d ",(char *)inet_ntoa(saddr_point.sin_addr),htons(saddr_point.sin_port),LiDARhost.data(),LiDARport);
+		ROS_ERROR("Please check the LiDAR or the config file!");
+		return false; 
+	}
+	return true;
 }
 
-int UDPNetwork::recvUDP(u_char* buf)
+int UDPNetwork::recvPoint(u_char* buf)
 {
-  bzero(buf,sizeof(buf));
-  addrlen = sizeof(caddr);
+	struct sockaddr_in point_addr;
+	bzero(buf,sizeof(buf));
+	socklen_t addrlen = sizeof(point_addr);
 
-  ret = recvfrom(sockfd,buf,1500,0,(struct sockaddr*)&caddr,&addrlen); //Recieve UDP packets
+	int ret = recvfrom(m_socketPoint, buf, 1500, 0, (struct sockaddr*)&point_addr, &addrlen); //Recieve UDP packets
 
-  return ret;
+	return ret;
 }
+
+int UDPNetwork::recvGPS(u_char* buf)
+{
+	struct sockaddr_in gps_addr;
+	bzero(buf,sizeof(buf));
+	socklen_t gps_addrlen = sizeof(gps_addr);
+
+	int ret = recvfrom(m_socketGPS, buf, 1500, 0, (struct sockaddr*)&gps_addr, &gps_addrlen); //Recieve UDP packets
+
+	return ret;
+}
+
 

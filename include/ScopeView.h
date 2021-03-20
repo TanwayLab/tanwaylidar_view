@@ -27,6 +27,8 @@ public:
 protected:
 	//应用原始点的UDP信息计算点信息
 	virtual void UseAnalysisPoint(int echo, int sepIndex, int faceIndex, float horAngle, int channel, float hexL, float hexPulseWidth);
+		//解析并打印打印GPS时间戳
+	virtual void UseAnalysisGPS(u_char* buffer);
 	//推送点云数据到ROS平台
 	virtual void PublishCloud();
 	
@@ -42,9 +44,11 @@ protected:
 	sensor_msgs::PointCloud2 m_rosPointCloud; 
 
 private:
+	//解析GPS数据包
+	void AnalysisGPSData();
 	//解析UDP数据包
 	void AnalysisUDPData();
-	//打印GPS时间戳
+	//打印数据包中的GPS信息
 	bool PrintTimeStamps(int offset);
 
 private:

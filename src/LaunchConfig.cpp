@@ -27,7 +27,6 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 	nh_private.param<std::string>("topic", m_topic, "/tanwaylidar_pointcloud");
 	nh_private.param<int>("port", m_localPort, 5600);
 	nh_private.param<int>("LiDARport", m_lidarPort, 5050);
-	nh_private.param<bool>("timestamp_print_switch", m_timestampPrintSwitch, false);
 	nh_private.param<double>("StartAngle", m_startAngle, 30.0);
 	nh_private.param<double>("EndAngle", m_endAngle, 150.0);
 
