@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+## Editor: LN
+## Updated Date: 2021-04-27
+## Function: Check connnection state and set IP for Tensor-Pro Lidar
+
+from python_qt_binding import loadUi
+from python_qt_binding.QtWidgets import QApplication,QMainWindow
+from tensorpro_interfaces.TanwayUserMenu import MyWindow
+import os
+import sys
+
+def main():
+  app = QApplication([])
+  parent_application = MyWindow()
+  parent_application.show()
+  sys.exit(app.exec_())
+
+if __name__ == '__main__':
+  main()
