@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-## Version: V1.2
-## Editor: LF Shen
-## Updated Date: 2019-11-26
+## Editor: LN
+## Updated Date: 2021-04-27
 ## Function: Check connnection state and set IP for Tensor-Pro Lidar
 
 from python_qt_binding import loadUi
