@@ -114,6 +114,15 @@ void ScopeView::UseAnalysisPoint(int echo, int sepIndex, int faceIndex, float ho
 {
 	if (echo != 1) return;
 
+	//调整非第一拍的水平角度值和第一拍 一致
+	if (sepIndex == 0)
+		m_firstSeparateAngle = horAngle;
+	else
+	{
+		if (m_firstSeparateAngle >= 0)
+			horAngle = m_firstSeparateAngle;
+	}
+
  	//float cos_hA_RA = cos(horAngle * RA);
 	//float sin_hA_RA = sin(horAngle * RA);
 	float vA = verticalChannels[channel-1];
