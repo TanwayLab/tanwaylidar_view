@@ -242,7 +242,7 @@ class MyWindow(QMainWindow):
         try:
             client_socket_send = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             client_socket_send.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-            client_socket_send.sendto(msg, ('192.168.111.255' , int(self.OriLidarport)))
+            client_socket_send.sendto(msg, (str(self.OriHOSTIP1.text())+"."+ str(self.OriHOSTIP2.text())+"."+str(self.OriHOSTIP3.text())+".255" , int(self.OriLidarport)))
         except:
             self.output_msg(self.OperateOut,"【错误】发送数据包时出现错误，请检查网络配置！\n")                                                   
             client_socket_send.close()
