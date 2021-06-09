@@ -22,26 +22,17 @@ public:
 	LaunchConfig();
 	~LaunchConfig();
 
-	enum LidarType
-	{
-		LT_Tensor_Lite, //0
-		LT_Tensor_Pro,	//1
-		LT_Scope		//2
-	};
-
 	void ReadLaunchParams(ros::NodeHandle& nh_private);
 
 public:
-	std::string m_host = "" ;
-	std::string m_lidarhost = "" ;
-	std::string m_frameID = "TanwayTP" ;
-	std::string m_topic = "/tanwaylidar_pointcloud" ;	
+	std::string m_localHost = "" ;
+	std::string m_lidarHost = "" ;
 	int m_localPort = -1;
-	int m_lidarPort = -1;	
-	double m_startAngle = 30;
-	double m_endAngle = 150;
+	int m_lidarPort = -1;
+	std::string m_frameID = "TanwayTP" ;
+	std::string m_topic = "/tanwaylidar_pointcloud" ;
 
-	LidarType m_lidarType;
+	int m_lidarType = -1;
 };
 
 #endif

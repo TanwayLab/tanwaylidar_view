@@ -119,6 +119,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
   include
+  sdk/src
   ${catkin_INCLUDE_DIRS}
 )
 ## Declare a C++ library
@@ -126,13 +127,13 @@ include_directories(
 #   src/${PROJECT_NAME}/TensorProView.cpp
 # )
 ## Declare a C++ library
-add_library(TanwayLidarView
-  src/TanwayLidarBase.cpp
-  src/TensorProView.cpp
-  src/ScopeView.cpp
-  src/Network.cpp 
-  src/LaunchConfig.cpp
-)
+#add_library(TanwayLidarView
+#  src/LaunchConfig.cpp
+#  sdk/src/NetworkReader.cpp
+#  sdk/src/PcapReader.cpp
+#  sdk/src/PackageCache.cpp
+#  sdk/src/TWException.cpp 
+#)
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -146,7 +147,7 @@ add_library(TanwayLidarView
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 
-add_executable(TanwayLidar_MainNode src/TanwayLidar_MainNode.cpp src/TanwayLidarBase.cpp src/TensorProView.cpp src/ScopeView.cpp src/Network.cpp src/LaunchConfig.cpp)
+add_executable(TanwayLidar_MainNode src/TanwayLidar_MainNode.cpp src/LaunchConfig.cpp sdk/src/NetworkReader.cpp sdk/src/PcapReader.cpp sdk/src/PackageCache.cpp sdk/src/TWException.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

@@ -65,7 +65,7 @@ Visualization Manager:
         Min Value: 0.2522689998149872
         Value: false
       Axis: Y
-      Channel Name: y
+      Channel Name: intensity
       Class: rviz/PointCloud2
       Color: 255; 255; 255
       Color Transformer: Intensity
@@ -73,7 +73,7 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: true
       Max Color: 255; 255; 255
-      Max Intensity: 50
+      Max Intensity: 30
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: PointCloud2
@@ -116,25 +116,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/ThirdPersonFollower
-      Distance: 11.741122245788574
+      Distance: 6.019000053405762
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.29153454303741455
-        Y: 0.8693451881408691
-        Z: 1.52587890625e-5
+        X: 1.5677428245544434
+        Y: -0.5695610046386719
+        Z: 1.6689300537109375e-5
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5353986620903015
+      Pitch: 0.5753986835479736
       Target Frame: <Fixed Frame>
       Value: ThirdPersonFollower (rviz)
-      Yaw: 4.618589878082275
+      Yaw: 5.2185845375061035
     Saved: ~
 Window Geometry:
   Displays:
