@@ -118,3 +118,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v1.0.2 | 2021年03月20日 | 增加Tensor-Pro产品下的GPS协议数据解析功能<br />更新IP修改工具，增加更多的修改反馈提示信息 |
 | tanwaylidar_view v1.0.3 | 2021年05月14日 | Scope设备水平角度对齐 |
 | tanwaylidar_view v1.0.4 | 2021年06月04日 | IP修改工具可能会失败的BUG |
+| tanwaylidar_view v2.0.0 | 2021年06月09日 | 修改view项目使用跨平台基层SDK |

@@ -12,9 +12,59 @@
 #include <ros/ros.h>
 #include <ros/console.h>
 #include "LaunchConfig.h"
-#include "ScopeView.h"
-#include "TensorProView.h"
+#include "../sdk/TanwayLidarSDK.h"
+#include <pcl/point_types.h>
+#include <pcl/point_cloud.h>
+#include <pcl_ros/point_cloud.h> //use these to convert between PCL and ROS datatypes
+#include <pcl/conversions.h>
 
+ros::Publisher rosPublisher;
+
+void pointCloudCallback(TWPointCloud<pcl::PointXYZI>::Ptr twPointCloud)
+{
+	/*
+	*The point cloud struct uses a smart pointer. 
+	*Please copy the point cloud data to another thread for use.
+	*Avoid directly operating the UI in the callback function.
+	*/
+	//std::cout << "width:" << twPointCloud->width 
+	//		  << " height:" << twPointCloud->height 
+	//		  << " point cloud size: " << twPointCloud->Size() << std::endl;
+	
+	
+	//to pcl point cloud
+	pcl::PointCloud<pcl::PointXYZI> cloud;
+	cloud.width = twPointCloud->width;
+	cloud.height = twPointCloud->height;
+	cloud.header.frame_id = twPointCloud->frame_id;
+	cloud.points.assign(twPointCloud->m_pointData.begin(), twPointCloud->m_pointData.end());
+
+	//to ros point cloud
+	sensor_msgs::PointCloud2 rosPointCloud; 
+	pcl::toROSMsg(cloud, rosPointCloud); //convert between PCL and ROS datatypes
+	rosPointCloud.header.stamp = ros::Time::now(); //Get ROS system time
+	rosPublisher.publish(rosPointCloud); //Publish cloud
+}
+
+void gpsCallback(std::string gps_value)
+{
+	/*
+	*Avoid directly operating the UI in the callback function.
+	*/
+	std::cout << gps_value << std::endl;
+}
+
+void exceptionCallback(const TWException& exception)
+{
+	/* 
+	*This callback function is called when the SDK sends a tip or raises an exception problem.
+	*Use another thread to respond to the exception to avoid time-consuming operations.
+	*/
+	if (exception.GetErrorCode() > 0)
+		std::cout << "[Error Code]: " << exception.GetErrorCode() << " -> " << exception.ToString() << std::endl;
+	if (exception.GetTipsCode() > 0)
+		std::cout << "[Tips Code]: " << exception.GetTipsCode() << " -> " << exception.ToString() << std::endl;	
+}
 
 
 int main(int argc, char** argv) 
@@ -26,50 +76,25 @@ int main(int argc, char** argv)
 	ros::NodeHandle nh_private("~");
 
 	ROS_INFO( "tanway lidar viewer for ROS" );
-	ROS_INFO( "Version 1.0.1" );
-	ROS_INFO( "Update Date: 2021/02/01\n" );
-	ROS_INFO( "View in rviz;");
+	ROS_INFO( "Version 2.0.0" );
+	ROS_INFO( "Update Date: 2021/06/03\n" );
+	ROS_INFO( "View in rviz");
 
 	//读取Launch配置文件
 	LaunchConfig launchConfig;
 	launchConfig.ReadLaunchParams(nh_private);
+	rosPublisher = nh.advertise<sensor_msgs::PointCloud2> (launchConfig.m_topic, 1);
 
-	//按设备类型，处理设备数据
-	TanwayLidarBase* pLidarBase = NULL;
-	switch (launchConfig.m_lidarType)
-	{
-		case LaunchConfig::LT_Tensor_Lite:
-		case LaunchConfig::LT_Tensor_Pro:
-			ROS_INFO( "[Run Info]--: Run Lidar Type: Tensor_Pro\n");
-			pLidarBase = new TensorProView();
-			break;
-		
-		case LaunchConfig::LT_Scope:
-			ROS_INFO( "[Run Info]--: Run Lidar Type: Scope(Beta)\n");
-			pLidarBase = new ScopeView();
-			break;
-
-		default:
-			ROS_INFO( "[Run Info]--: Run Lidar Type: Unknown(error)\n");
-			ros::shutdown();
-			return 0;
-	}
-
-	if (!pLidarBase->Initialize(nh, launchConfig))
-	{
-		ROS_INFO( "[error] --Init UDP Socket Failed!\n");
-		delete pLidarBase;
-		pLidarBase = NULL;
-		ros::shutdown();
-		return 0;
-	}
+	TanwayLidarSDK<pcl::PointXYZI> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPort, (TWLidarType)(launchConfig.m_lidarType));
+	lidar.RegPointCloudCallback(pointCloudCallback);
+	lidar.RegGPSCallback(gpsCallback);
+	lidar.RegExceptionCallback(exceptionCallback);
+	lidar.Start();
 
 	while (ros::ok())
 	{
-		pLidarBase->GetUDP();
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 
-	delete pLidarBase;
-	pLidarBase = NULL;
 	return 0;
 }
