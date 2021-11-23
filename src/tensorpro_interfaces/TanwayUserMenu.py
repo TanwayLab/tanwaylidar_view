@@ -22,6 +22,7 @@ import struct
 import re
 import rospkg
 import psutil
+import ConfigParser
 
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
@@ -39,6 +40,74 @@ class MyWindow(QMainWindow):
         self.Check.clicked.connect(self.check_button) #check button for connection check
         self.SetIP.clicked.connect(self.setIP_button) #SetIP button for IP Set
 
+        #read ini
+        if os.path.exists("twcconfig.ini"):
+            try:
+                config = ConfigParser.ConfigParser()
+                config.readfp(open("twcconfig.ini"))
+                read_ori_lidarip1 = config.get("ORI","lidar_ip1")
+                read_ori_lidarip2 = config.get("ORI","lidar_ip2")
+                read_ori_lidarip3 = config.get("ORI","lidar_ip3")
+                read_ori_lidarip4 = config.get("ORI","lidar_ip4")
+                read_ori_lidarport = config.get("ORI","lidar_port")
+                read_ori_hostip1 = config.get("ORI","host_ip1")
+                read_ori_hostip2 = config.get("ORI","host_ip2")
+                read_ori_hostip3 = config.get("ORI","host_ip3")
+                read_ori_hostip4 = config.get("ORI","host_ip4")
+                read_ori_hostport = config.get("ORI","host_port")
+        
+                read_mac1 = config.get("ORI","lidar_mac1")
+                read_mac2 = config.get("ORI","lidar_mac2")
+                read_mac3 = config.get("ORI","lidar_mac3")
+                read_mac4 = config.get("ORI","lidar_mac4")
+                read_mac5 = config.get("ORI","lidar_mac5")
+                read_mac6 = config.get("ORI","lidar_mac6")
+        
+                read_new_lidarip1 = config.get("NEW","lidar_ip1")
+                read_new_lidarip2 = config.get("NEW","lidar_ip2")
+                read_new_lidarip3 = config.get("NEW","lidar_ip3")
+                read_new_lidarip4 = config.get("NEW","lidar_ip4")
+                read_new_lidarport = config.get("NEW","lidar_port")
+                read_new_hostip1 = config.get("NEW","host_ip1")
+                read_new_hostip2 = config.get("NEW","host_ip2")
+                read_new_hostip3 = config.get("NEW","host_ip3")
+                read_new_hostip4 = config.get("NEW","host_ip4")
+                read_new_hostport = config.get("NEW","host_port")
+        
+                self.OriLiDARIP1.setText(read_ori_lidarip1)
+                self.OriLiDARIP2.setText(read_ori_lidarip2)
+                self.OriLiDARIP3.setText(read_ori_lidarip3)
+                self.OriLiDARIP4.setText(read_ori_lidarip4)
+                self.OriLiDARPort.setText(read_ori_lidarport)
+                
+                self.OriHOSTIP1.setText(read_ori_hostip1)
+                self.OriHOSTIP2.setText(read_ori_hostip2)
+                self.OriHOSTIP3.setText(read_ori_hostip3)
+                self.OriHOSTIP4.setText(read_ori_hostip4)
+                self.OriHOSTPort.setText(read_ori_hostport)
+        
+                self.LiDARMac1.setText(read_mac1)
+                self.LiDARMac2.setText(read_mac2)
+                self.LiDARMac3.setText(read_mac3)
+                self.LiDARMac4.setText(read_mac4)
+                self.LiDARMac5.setText(read_mac5)
+                self.LiDARMac6.setText(read_mac6)
+        
+                self.NewLiDARIP1.setText(read_new_lidarip1)
+                self.NewLiDARIP2.setText(read_new_lidarip2)
+                self.NewLiDARIP3.setText(read_new_lidarip3)
+                self.NewLiDARIP4.setText(read_new_lidarip4)
+                self.NewLiDARPort.setText(read_new_lidarport)
+        
+                self.NewHOSTIP1.setText(read_new_hostip1)
+                self.NewHOSTIP2.setText(read_new_hostip2)
+                self.NewHOSTIP3.setText(read_new_hostip3)
+                self.NewHOSTIP4.setText(read_new_hostip4)
+                self.NewHOSTPort.setText(read_new_hostport)
+            except:
+                print("Read config file(twcconfig.ini) error.")
+            	
+        #basic param
         self.OriLidarIP = ""
         self.OriLidarport = 0
         self.OriHostIP = ""
@@ -48,6 +117,8 @@ class MyWindow(QMainWindow):
         self.NewLidarport = 5050
         self.NewHostIP = ""
         self.NewHostport = 5600
+
+        
 
         self.check_flag = 0
         self.ip_flag = 0
@@ -183,6 +254,44 @@ class MyWindow(QMainWindow):
         QApplication.processEvents()
         if self.getMacInfo()==-1 or self.getOriInfo()==-1 or self.getNewInfo()==-1 or self.checkIPLegality() == -1:
             return -1
+
+        #write ini
+        config = ConfigParser.ConfigParser()
+        try:
+            config.add_section("ORI")
+            config.set("ORI","lidar_ip1", str(self.OriLiDARIP1.text()))
+            config.set("ORI","lidar_ip2", str(self.OriLiDARIP2.text()))
+            config.set("ORI","lidar_ip3", str(self.OriLiDARIP3.text()))
+            config.set("ORI","lidar_ip4", str(self.OriLiDARIP4.text()))
+            config.set("ORI","lidar_port", str(self.OriLiDARPort.text()))
+            config.set("ORI","host_ip1", str(self.OriHOSTIP1.text()))
+            config.set("ORI","host_ip2", str(self.OriHOSTIP2.text()))
+            config.set("ORI","host_ip3", str(self.OriHOSTIP3.text()))
+            config.set("ORI","host_ip4", str(self.OriHOSTIP4.text()))
+            config.set("ORI","host_port", str(self.OriHOSTPort.text()))
+
+            config.set("ORI","lidar_mac1", str(self.LiDARMac1.text()))
+            config.set("ORI","lidar_mac2", str(self.LiDARMac2.text()))
+            config.set("ORI","lidar_mac3", str(self.LiDARMac3.text()))
+            config.set("ORI","lidar_mac4", str(self.LiDARMac4.text()))
+            config.set("ORI","lidar_mac5", str(self.LiDARMac5.text()))
+            config.set("ORI","lidar_mac6", str(self.LiDARMac6.text()))
+        
+            config.add_section("NEW")
+            config.set("NEW","lidar_ip1", str(self.NewLiDARIP1.text()))
+            config.set("NEW","lidar_ip2", str(self.NewLiDARIP2.text()))
+            config.set("NEW","lidar_ip3", str(self.NewLiDARIP3.text()))
+            config.set("NEW","lidar_ip4", str(self.NewLiDARIP4.text()))
+            config.set("NEW","lidar_port", str(self.NewLiDARPort.text()))
+            config.set("NEW","host_ip1", str(self.NewHOSTIP1.text()))
+            config.set("NEW","host_ip2", str(self.NewHOSTIP2.text()))
+            config.set("NEW","host_ip3", str(self.NewHOSTIP3.text()))
+            config.set("NEW","host_ip4", str(self.NewHOSTIP4.text()))
+            config.set("NEW","host_port", str(self.NewHOSTPort.text()))
+            config.write(open("./twcconfig.ini", "w"))
+        except:
+            print("Failed to save the usage record(twcconfig.ini).")
+
         try:
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             ip_port = (self.OriHostIP , 6677)

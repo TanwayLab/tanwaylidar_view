@@ -119,3 +119,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v1.0.3 | 2021年05月14日 | Scope设备水平角度对齐 |
 | tanwaylidar_view v1.0.4 | 2021年06月04日 | IP修改工具可能会失败的BUG |
 | tanwaylidar_view v2.0.0 | 2021年06月09日 | 修改view项目使用跨平台基层SDK |
+| tanwaylidar_view v2.0.1 | 2021年08月04日 | IP修改工具的易用性输入记录 |
