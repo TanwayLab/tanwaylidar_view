@@ -53,6 +53,8 @@ source ~/.bashrc
 ```bash
 【以TensorPro设备为例】roslaunch tanwaylidar_view TensorPro.launch
 【以Scope设备为例】roslaunch tanwaylidar_view Scope.launch
+【以TSP03-32设备为例】roslaunch tanwaylidar_view TSP03-32.launch
+【以Scope-192设备为例】roslaunch tanwaylidar_view Scope-192.launch
 ```
 
 ![](./resource/pic/example.png "")
@@ -120,3 +122,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v1.0.4 | 2021年06月04日 | IP修改工具可能会失败的BUG |
 | tanwaylidar_view v2.0.0 | 2021年06月09日 | 修改view项目使用跨平台基层SDK |
 | tanwaylidar_view v2.0.1 | 2021年08月04日 | IP修改工具的易用性输入记录 |
+| tanwaylidar_view v2.0.2 | 2022年03月16日 | 增加对TSP03-32、Scope-192设备的支持 |

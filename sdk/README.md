@@ -24,7 +24,7 @@ git clone https://github.com/TanwayLab/TanwayLidarSDK.git
 
 - ##### Ubuntu平台
 
-  g++ (Ubuntu 7.5.0-3ubuntu1~18.04已测试) ，如果仅使用本SDK进行测试，可进入到下载完成后的TanwayLidarSD目录下，执行make命令，编译成功后执行./run_demo命令，即可运行示例程序；集成到具体项目中可直接使用除demo文件夹外的源码进行开发。
+  g++ (Ubuntu 7.5.0-3ubuntu1~18.04已测试) ，如果仅使用本SDK进行测试，可进入到下载完成后的TanwayLidarSDK目录下，执行make命令，编译成功后执行./run_demo命令，即可运行示例程序；集成到具体项目中可直接使用除demo文件夹外的源码进行开发。
 
 ## 4 接口的使用示例
 
@@ -55,7 +55,7 @@ git clone https://github.com/TanwayLab/TanwayLidarSDK.git
   定义SDK实例对象，仅参数与实时连接雷达时不同，其他一致。参数：.pcap文件路径、雷达型号、雷达的IP地址、数据接收端口。
 
   ```
-  TanwayLidarSDK<PointXYZ> lidar(".\\test.pcap", LT_TensorPro, "192.168.111.51", 5600);
+  TanwayLidarSDK<PointXYZ> lidar("./test.pcap", LT_TensorPro, "192.168.111.51", 5600);
   lidar.RegPointCloudCallback(pointCloudCallback);
   lidar.RegGPSCallback(gpsCallback);
   lidar.RegExceptionCallback(exceptionCallback);
@@ -64,7 +64,9 @@ git clone https://github.com/TanwayLab/TanwayLidarSDK.git
 
 ## 5 历史版本描述
 
-| 版本号 | 更新内容 |
-| ------ | -------- |
-| v1.0.0 |          |
+| 版本号 | 更新时间       | 更新内容                            |
+| ------ | -------------- | ----------------------------------- |
+| v1.0.0 |                |                                     |
+| v1.0.1 | 2021年12月22日 | 增加点云帧时间戳和单点时间戳        |
+| v1.0.2 | 2022年03月15日 | 增加对TSP03-32、Scope-192雷达的支持 |
 

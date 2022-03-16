@@ -31,5 +31,21 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 	nh_private.param<std::string>("topic", m_topic, "/tanwaylidar_pointcloud");
 
 	nh_private.param<int>("LidarType", m_lidarType, -1);
+
+	//TSP03-32
+	if (4 == m_lidarType)
+	{
+		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, 0);
+		nh_private.param<double>("CorrectedAngle2", m_correctedAngle1, -6.0);
+	}
+	//Scope-192
+	else if (5 == m_lidarType)
+	{
+		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, 0);
+		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.1);
+		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.2);
+	}
+	
+	
 }
 
