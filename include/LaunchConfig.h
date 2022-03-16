@@ -4,7 +4,7 @@
  *  License:　BSD 3-Clause License
  *
  *  Created on: 16-01-2021
- *  Edited on: 30-01-2021
+ *  Edited on: 15-03-2022
  *  Author: LN
 
  *  config setting for Tanway LIDARs
@@ -33,6 +33,10 @@ public:
 	std::string m_topic = "/tanwaylidar_pointcloud" ;
 
 	int m_lidarType = -1;
+
+	double m_correctedAngle1 = 0;
+	double m_correctedAngle2 = 0;
+	double m_correctedAngle3 = 0;
 };
 
 #endif

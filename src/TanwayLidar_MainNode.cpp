@@ -3,7 +3,7 @@
  *  License:　BSD 3-Clause License
  *
  *  Created on: 16-01-2021
- *  Edited on: 30-01-2021
+ *  Edited on: 15-03-2022
  *  Author: LN
 
  *  Node for Tanway 3D LIDARs   
@@ -76,7 +76,6 @@ int main(int argc, char** argv)
 	ros::NodeHandle nh_private("~");
 
 	ROS_INFO( "tanway lidar viewer for ROS" );
-	ROS_INFO( "Version 2.0.0" );
 	ROS_INFO( "Update Date: 2021/06/03\n" );
 	ROS_INFO( "View in rviz");
 
@@ -89,6 +88,10 @@ int main(int argc, char** argv)
 	lidar.RegPointCloudCallback(pointCloudCallback);
 	lidar.RegGPSCallback(gpsCallback);
 	lidar.RegExceptionCallback(exceptionCallback);
+	if (LT_TSP0332 == launchConfig.m_lidarType)
+		lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
+	else if (LT_Scope192 == launchConfig.m_lidarType)
+		lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 	lidar.Start();
 
 	while (ros::ok())
