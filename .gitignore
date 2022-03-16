@@ -4,6 +4,5 @@
 ._*  
 # pyc files #
 *.pyc
-*.launch
 *.rviz
 LICENSE
