@@ -123,3 +123,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.0.0 | 2021年06月09日 | 修改view项目使用跨平台基层SDK |
 | tanwaylidar_view v2.0.1 | 2021年08月04日 | IP修改工具的易用性输入记录 |
 | tanwaylidar_view v2.0.2 | 2022年03月16日 | 增加对TSP03-32、Scope-192设备的支持 |
+| tanwaylidar_view v2.0.3 | 2022年03月22日 | 修改TSP03-32的launch文件加载错误bug |
