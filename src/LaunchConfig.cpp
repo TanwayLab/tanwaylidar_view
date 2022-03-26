@@ -42,8 +42,8 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 	else if (5 == m_lidarType)
 	{
 		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, 0);
-		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.1);
-		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.2);
+		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.12);
+		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.24);
 	}
 	
 	
