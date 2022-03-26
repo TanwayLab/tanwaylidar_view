@@ -15,9 +15,9 @@
 		<!--组修正角度值1-->
 		<param name="CorrectedAngle1" type="double" value="0.0" />		
 		<!--组修正角度值2-->
-		<param name="CorrectedAngle2" type="double" value="0.1" />	
+		<param name="CorrectedAngle2" type="double" value="0.12" />	
 		<!--组修正角度值3-->
-		<param name="CorrectedAngle3" type="double" value="0.2" />	
+		<param name="CorrectedAngle3" type="double" value="0.24" />	
 	</node>
 
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find tanwaylidar_view)/rviz/tanwayrun.rviz" />
