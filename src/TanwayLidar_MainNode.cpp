@@ -76,7 +76,7 @@ int main(int argc, char** argv)
 	ros::NodeHandle nh_private("~");
 
 	ROS_INFO( "tanway lidar viewer for ROS" );
-	ROS_INFO( "Update Date: 2021/06/03\n" );
+	ROS_INFO( "Update Date: 2022/04/20\n" );
 	ROS_INFO( "View in rviz");
 
 	//读取Launch配置文件
@@ -92,6 +92,9 @@ int main(int argc, char** argv)
 		lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 	else if (LT_Scope192 == launchConfig.m_lidarType)
 		lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
+	else if (LT_Duetto == launchConfig.m_lidarType)
+		lidar.SetMoveAngleToDuetto(launchConfig.m_leftMoveAngle, launchConfig.m_rightMoveAngle);
+	
 	lidar.Start();
 
 	while (ros::ok())
