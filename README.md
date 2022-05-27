@@ -125,4 +125,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.0.2 | 2022年03月16日 | 增加对TSP03-32、Scope-192设备的支持 |
 | tanwaylidar_view v2.0.3 | 2022年03月22日 | 修改TSP03-32的launch文件加载错误bug |
 | tanwaylidar_view v2.0.4 | 2022年03月26日 | 修改Scope-192默认组修正角度值，更新跨平台SDK版本到1.0.4 |
-
+| tanwaylidar_view v2.0.5 | 2022年04月20日 | 更新sdk版本，增加对Duetto设备的支持，更新跨平台SDK版本到1.0.5 |
