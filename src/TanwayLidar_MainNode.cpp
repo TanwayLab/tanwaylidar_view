@@ -94,6 +94,9 @@ int main(int argc, char** argv)
 		lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 	else if (LT_Duetto == launchConfig.m_lidarType)
 		lidar.SetMoveAngleToDuetto(launchConfig.m_leftMoveAngle, launchConfig.m_rightMoveAngle);
+	else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
+		lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
+	
 	
 	lidar.Start();
 
