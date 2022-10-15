@@ -40,6 +40,13 @@ public:
 
 	double m_leftMoveAngle = 0;
 	double m_rightMoveAngle = 0;
+
+	double m_correctedMovementLX = 0;
+	double m_correctedMovementLY = 0;
+	double m_correctedMovementLZ = 0;
+	double m_correctedMovementRX = 0;
+	double m_correctedMovementRY = 0;
+	double m_correctedMovementRZ = 0;
 };
 
 #endif
