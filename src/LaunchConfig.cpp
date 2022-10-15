@@ -9,6 +9,7 @@
  *  config setting for Tanway LIDARs
 **************************************************/
 #include <LaunchConfig.h>
+#include "../sdk/TanwayLidarSDK.h"
 
 LaunchConfig::LaunchConfig()
 {
@@ -33,24 +34,42 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 	nh_private.param<int>("LidarType", m_lidarType, -1);
 
 	//TSP03-32
-	if (4 == m_lidarType)
+	if (LT_TSP0332 == m_lidarType)
 	{
 		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, 0);
 		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, -6.0);
 	}
 	//Scope-192
-	else if (5 == m_lidarType)
+	else if (LT_Scope192 == m_lidarType)
 	{
 		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, 0);
 		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.12);
 		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.24);
 	}
-	else if (6 == m_lidarType)
+	//Duetto
+	else if (LT_Duetto == m_lidarType)
 	{
+		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, -4.5);
+		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.0);
+		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 4.5);
+
+		nh_private.param<double>("CorrectionMovementLX", m_correctedMovementLX, 0.0);
+		nh_private.param<double>("CorrectionMovementLY", m_correctedMovementLY, 0.0);
+		nh_private.param<double>("CorrectionMovementLZ", m_correctedMovementLZ, 0.0);
+		nh_private.param<double>("CorrectionMovementRX", m_correctedMovementRX, 0.0);
+		nh_private.param<double>("CorrectionMovementRY", m_correctedMovementRY, 0.0);
+		nh_private.param<double>("CorrectionMovementRZ", m_correctedMovementRZ, 0.0);
+
 		nh_private.param<double>("LeftMoveAngle", m_leftMoveAngle, 30.0);
-		nh_private.param<double>("RightMoveAngle", m_rightMoveAngle, 30.0);
+		nh_private.param<double>("RightMoveAngle", m_rightMoveAngle, -30.0);
 	}
-	
+	//ScopeMini-A2-192
+	else if (LT_ScopeMiniA2_192 == m_lidarType)
+	{
+		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, 0);
+		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.1);
+		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.2);
+	}
 	
 }
 
