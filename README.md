@@ -129,3 +129,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.0.6 | 2022年06月23日 | 更新跨平台SDK版本到1.0.6 |
 | tanwaylidar_view v2.0.7 | 2022年09月20日 | 更新跨平台SDK版本到1.0.7，增加ScopeMiniA2-192设备型号的支持 |
 | tanwaylidar_view v2.0.8 | 2022年10月15日 | 更新Duetto的launch文件支持标定参数输入；<br />修改ScopeMiniA2-192设备默认的组修正角度值； |
+| tanwaylidar_view v2.0.9 | 2022年10月18日 | 更新跨平台SDK版本到1.0.9 |
