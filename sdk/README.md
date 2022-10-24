@@ -44,7 +44,7 @@ git clone https://github.com/TanwayLab/TanwayLidarSDK.git
   lidar.RegExceptionCallback(exceptionCallback);
   ```
 
-  启动实例，此时如果雷达正常连接将可以在上面的回调函数中获取到相应的数据。
+  启动实例，此时如果雷达正常连接将可以在上面的回调函数中获取到相应的数据。 
 
   ```
   lidar.Start();

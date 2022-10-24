@@ -48,7 +48,7 @@ source ~/.bashrc
 
 1. 修改电脑IP为与雷达通信的IP，默认为"192.168.111.204"
 
-1. 运行程序，正常查看点云
+1. 运行程序，正常查看点云 
 
 ```bash
 【以TensorPro设备为例】roslaunch tanwaylidar_view TensorPro.launch

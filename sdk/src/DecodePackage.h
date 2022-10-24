@@ -822,7 +822,7 @@ template <typename PointT>
 void DecodePackage<PointT>::UseDecodeTensorPro0332(char* udpData, std::vector<TWPointData>& pointCloud)
 {
 	for (int blocks_num = 0; blocks_num < 20; blocks_num++)
-	{
+	{ 
 		int offset = blocks_num * 72;
 
 		unsigned int HextoAngle = FourHexToInt(udpData[offset + 64], udpData[offset + 65], udpData[offset + 66], udpData[offset + 67]);

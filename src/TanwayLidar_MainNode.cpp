@@ -18,7 +18,7 @@
 #include <pcl_ros/point_cloud.h> //use these to convert between PCL and ROS datatypes
 #include <pcl/conversions.h>
 
-ros::Publisher rosPublisher;
+ros::Publisher rosPublisher; 
 
 struct TanwayPCLEXPoint
 {

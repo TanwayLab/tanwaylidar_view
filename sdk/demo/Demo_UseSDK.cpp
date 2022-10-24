@@ -32,7 +32,7 @@
 */
 
 #include "../TanwayLidarSDK.h"
-
+ 
 //point struct
 struct PointXYZ
 {
