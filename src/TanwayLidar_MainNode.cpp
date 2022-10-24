@@ -20,7 +20,35 @@
 
 ros::Publisher rosPublisher;
 
-void pointCloudCallback(TWPointCloud<pcl::PointXYZI>::Ptr twPointCloud)
+struct TanwayPCLEXPoint
+{
+  PCL_ADD_POINT4D;
+
+	float intensity;
+  	int channel;
+	float angle;
+	int echo;
+	int block;				/*For duetto*/
+  	unsigned int t_sec;     /* The value represents seconds since 1900-01-01 00:00:00 (the UNIX epoch).*/ 
+	unsigned int t_usec;    /* remaining microseconds */
+  EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+} EIGEN_ALIGN16;
+
+POINT_CLOUD_REGISTER_POINT_STRUCT(TanwayPCLEXPoint,
+                                  (float, x, x)
+                                  (float, y, y)
+                                  (float, z, z)
+                                  (float, intensity, intensity)
+                                  (int, channel, channel)
+                                  (float, angle, angle)	
+                                  (int, echo, echo)
+								  (int, block, block)
+								  (unsigned int, t_sec, t_sec)
+								  (unsigned int, t_usec, t_usec)
+                                 )
+
+
+void pointCloudCallback(TWPointCloud<TanwayPCLEXPoint>::Ptr twPointCloud)
 {
 	/*
 	*The point cloud struct uses a smart pointer. 
@@ -33,7 +61,7 @@ void pointCloudCallback(TWPointCloud<pcl::PointXYZI>::Ptr twPointCloud)
 	
 	
 	//to pcl point cloud
-	pcl::PointCloud<pcl::PointXYZI> cloud;
+	pcl::PointCloud<TanwayPCLEXPoint> cloud;
 	cloud.width = twPointCloud->width;
 	cloud.height = twPointCloud->height;
 	cloud.header.frame_id = twPointCloud->frame_id;
@@ -84,7 +112,7 @@ int main(int argc, char** argv)
 	launchConfig.ReadLaunchParams(nh_private);
 	rosPublisher = nh.advertise<sensor_msgs::PointCloud2> (launchConfig.m_topic, 1);
 
-	TanwayLidarSDK<pcl::PointXYZI> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPort, (TWLidarType)(launchConfig.m_lidarType));
+	TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPort, (TWLidarType)(launchConfig.m_lidarType));
 	lidar.RegPointCloudCallback(pointCloudCallback);
 	lidar.RegGPSCallback(gpsCallback);
 	lidar.RegExceptionCallback(exceptionCallback);
