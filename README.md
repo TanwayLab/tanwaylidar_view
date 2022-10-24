@@ -48,19 +48,21 @@ source ~/.bashrc
 
 1. 修改电脑IP为与雷达通信的IP，默认为"192.168.111.204"
 
-1. 运行程序，正常查看点云
+1. 运行程序，正常查看点云 
 
 ```bash
 【以TensorPro设备为例】roslaunch tanwaylidar_view TensorPro.launch
 【以Scope设备为例】roslaunch tanwaylidar_view Scope.launch
 【以TSP03-32设备为例】roslaunch tanwaylidar_view TSP03-32.launch
 【以Scope-192设备为例】roslaunch tanwaylidar_view Scope-192.launch
+【以ScopeMiniA2-192设备为例】roslaunch tanwaylidar_view ScopeMiniA2-192.launch
+【以Duetto设备为例】roslaunch tanwaylidar_view Duetto.launch
 ```
 
 ![](./resource/pic/example.png "")
 
 
-# IP修改工具使用
+# IP修改工具使用(仅支持TensorPro)
 
 ```bash
 rosrun tanwaylidar_view tensorpro_interfaces
@@ -131,3 +133,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.0.8 | 2022年10月15日 | 更新Duetto的launch文件支持标定参数输入；<br />修改ScopeMiniA2-192设备默认的组修正角度值； |
 | tanwaylidar_view v2.0.9 | 2022年10月18日 | 更新跨平台SDK版本到1.0.9 |
 | tanwaylidar_view v2.0.10 | 2022年10月22日 | 更新跨平台SDK版本到1.0.10 |
+| tanwaylidar_view v2.0.11 | 2022年10月24日 | 更新跨平台SDK版本到1.0.11，并扩展点云数据中点的属性信息：<br />通道、水平角度、块标志、时间信息等 |
