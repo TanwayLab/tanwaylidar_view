@@ -43,8 +43,8 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 	else if (LT_Scope192 == m_lidarType)
 	{
 		nh_private.param<double>("CorrectedAngle1", m_correctedAngle1, 0);
-		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.12);
-		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.24);
+		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, -0.12);
+		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, -0.24);
 	}
 	//Duetto
 	else if (LT_Duetto == m_lidarType)

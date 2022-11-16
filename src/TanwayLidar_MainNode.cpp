@@ -65,12 +65,12 @@ void pointCloudCallback(TWPointCloud<TanwayPCLEXPoint>::Ptr twPointCloud)
 	cloud.width = twPointCloud->width;
 	cloud.height = twPointCloud->height;
 	cloud.header.frame_id = twPointCloud->frame_id;
+	cloud.header.stamp = twPointCloud->stamp;
 	cloud.points.assign(twPointCloud->m_pointData.begin(), twPointCloud->m_pointData.end());
 
 	//to ros point cloud
 	sensor_msgs::PointCloud2 rosPointCloud; 
 	pcl::toROSMsg(cloud, rosPointCloud); //convert between PCL and ROS datatypes
-	rosPointCloud.header.stamp = ros::Time::now(); //Get ROS system time
 	rosPublisher.publish(rosPointCloud); //Publish cloud
 }
 

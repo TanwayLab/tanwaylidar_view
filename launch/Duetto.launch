@@ -16,23 +16,23 @@
 		
 
 		<!--组修正角度值1-->
-		<param name="CorrectedAngle1" type="double" value="-4.5" />		
+		<param name="CorrectedAngle1" type="double" value="-4.432" />		
 		<!--组修正角度值2-->
 		<param name="CorrectedAngle2" type="double" value="0.0" />	
 		<!--组修正角度值3-->
-		<param name="CorrectedAngle3" type="double" value="4.5" />	
+		<param name="CorrectedAngle3" type="double" value="4.532" />	
 
 		<!--左偏移角度[15~45]-->
-		<param name="LeftMoveAngle" type="double" value="30.0" />		
+		<param name="LeftMoveAngle" type="double" value="30.35" />		
 		<!--右偏移角度[-15~-45]--> 
-		<param name="RightMoveAngle" type="double" value="-30.0" />	
+		<param name="RightMoveAngle" type="double" value="-30.35" />	
 
 		<!--左偏移量-->
-		<param name="CorrectionMovementLX" type="double" value="0" />
+		<param name="CorrectionMovementLX" type="double" value="0.025" />
 		<param name="CorrectionMovementLY" type="double" value="0" />		
 		<param name="CorrectionMovementLZ" type="double" value="0" />		
 		<!--右偏移量--> 
-		<param name="CorrectionMovementRX" type="double" value="0" />
+		<param name="CorrectionMovementRX" type="double" value="-0.025" />
 		<param name="CorrectionMovementRY" type="double" value="0" />		
 		<param name="CorrectionMovementRZ" type="double" value="0" />		
 		
