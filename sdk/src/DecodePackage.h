@@ -1153,7 +1153,7 @@ void DecodePackage<PointT>::UseDecodeScopeMiniA2_192(char* udpData, std::vector<
 			hexMirror = hexMirror << 2;
 			mirror = hexMirror >> 6;
 
-			//offset angle m_skewing_scopeMiniA2_angle
+			//offset angle m_skewing_scopeMiniA2_angle 
 			float offsetAngle = 0;
 			unsigned char  hexACount = udpData[offset + 136];
 			hexACount = hexACount << 4;
