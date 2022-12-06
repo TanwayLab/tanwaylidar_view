@@ -137,3 +137,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.0.12 | 2022年11月16日 | 更新跨平台SDK版本到1.0.12；修改Scope-192.launch文件中默认组修正角度值为0、-0.12、-0.24 |
 | tanwaylidar_view v2.0.13 | 2022年11月21日 | 更新跨平台SDK版本到1.0.13；修改ROS发布点云时间值取跨平台SDK中点云帧的时间值； |
 | tanwaylidar_view v2.0.14 | 2022年11月28日 | 更新跨平台SDK版本到1.0.14； |
+| tanwaylidar_view v2.1.0 | 2022年12月06日 | 更新跨平台SDK版本到1.1.0；取消Duetto.launch文件中对标定参数的配置，由SDK解析获取； |
