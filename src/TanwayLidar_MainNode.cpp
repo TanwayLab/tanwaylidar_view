@@ -112,7 +112,7 @@ int main(int argc, char** argv)
 	launchConfig.ReadLaunchParams(nh_private);
 	rosPublisher = nh.advertise<sensor_msgs::PointCloud2> (launchConfig.m_topic, 1);
 
-	TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPort, (TWLidarType)(launchConfig.m_lidarType));
+	TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPointCloudPort, launchConfig.m_localDIFPort, (TWLidarType)(launchConfig.m_lidarType));
 	lidar.RegPointCloudCallback(pointCloudCallback);
 	lidar.RegGPSCallback(gpsCallback);
 	lidar.RegExceptionCallback(exceptionCallback);
@@ -120,16 +120,8 @@ int main(int argc, char** argv)
 		lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 	else if (LT_Scope192 == launchConfig.m_lidarType)
 		lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-	else if (LT_Duetto == launchConfig.m_lidarType)
-		{
-			lidar.SetCorrectionAngleToDuetto(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-			lidar.SetCorrectionMovementToDuetto(launchConfig.m_correctedMovementLX, launchConfig.m_correctedMovementLY, launchConfig.m_correctedMovementLZ, 
-												launchConfig.m_correctedMovementRX, launchConfig.m_correctedMovementRY, launchConfig.m_correctedMovementRZ);
-			lidar.SetMoveAngleToDuetto(launchConfig.m_leftMoveAngle, launchConfig.m_rightMoveAngle);
-		}
 	else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
 		lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-	
 	
 	lidar.Start();
 
