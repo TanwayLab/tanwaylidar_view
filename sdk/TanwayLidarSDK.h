@@ -47,20 +47,22 @@ public:
 	/*
 	*lidarIP: ip address of connected lidar.
 	*localIP: ip address of local
-	*localPort: the network port which the lidar is send to
+	*localPointloudPort: the network port which the lidar pointcloud data is send to
+	*localDIFPort: the network port which the lidar dif data is send to
 	*lidarType: lidar type
 	*decodePackagePtr: new decode processing
 	*/
-	TanwayLidarSDK(std::string lidarIP, std::string localIP, int localPort, TWLidarType lidarType, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr = NULL);
+	TanwayLidarSDK(std::string lidarIP, std::string localIP, int localPointloudPort, int localDIFPort, TWLidarType lidarType, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr = NULL);
 	/*
 	*pcapPath: the pcap file path
 	*lidarType: lidar type
 	*lidarIPForFilter: the IP address of the lidar used to filter data
-	*localPort: the network port which the lidar is sent to
+	*localPointCloudPortForFilter: the network port which the lidar pointcloud data is send to
+	*localDIFPortForFilter: the network port which the lidar dif data is send to
 	*repeat: Loops through the PCAP files
 	*decodePackagePtr: new decode processing
 	*/
-	TanwayLidarSDK(std::string pcapPath, std::string lidarIPForFilter, int localPortForFilter, TWLidarType lidarType, bool repeat, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr = NULL);
+	TanwayLidarSDK(std::string pcapPath, std::string lidarIPForFilter, int localPointCloudPortForFilter, int localDIFPortForFilter, TWLidarType lidarType, bool repeat, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr = NULL);
 
 	~TanwayLidarSDK();
 
@@ -91,6 +93,10 @@ public:
 	*/
 	inline void RegGPSCallback(const std::function<void(const std::string&)>& callback);
 	/*
+	*Register the IMU data callback function.
+	*/
+	inline void RegIMUDataCallback(const std::function<void(const TWIMUData&)>& callback);
+	/*
 	*Register the exception info callback function.
 	*/
 	inline void RegExceptionCallback(const std::function<void(const TWException&)>& callback);
@@ -110,10 +116,10 @@ private:
 
 
 template <typename PointT>
-TanwayLidarSDK<PointT>::TanwayLidarSDK(std::string lidarIP, std::string localIP, int localPort, TWLidarType lidarType, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr)
+TanwayLidarSDK<PointT>::TanwayLidarSDK(std::string lidarIP, std::string localIP, int localPointloudPort, int localDIFPort, TWLidarType lidarType, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr)
 {
 	m_packageCache = std::make_shared<PackageCache>();
-	m_networkReaderPtr = std::make_shared<NetworkReader>(lidarIP, localIP, localPort, *m_packageCache, &m_mutexE);
+	m_networkReaderPtr = std::make_shared<NetworkReader>(lidarType, lidarIP, localIP, localPointloudPort, localDIFPort, *m_packageCache, &m_mutexE);
 	if (!decodePackagePtr)
 	{
 		m_decodePackagePtr = std::make_shared<DecodePackage<PointT>>(m_packageCache, lidarType, &m_mutexE);
@@ -128,10 +134,10 @@ TanwayLidarSDK<PointT>::TanwayLidarSDK(std::string lidarIP, std::string localIP,
 }
 
 template <typename PointT>
-TanwayLidarSDK<PointT>::TanwayLidarSDK(std::string pcapPath, std::string lidarIPForFilter, int localPortForFilter, TWLidarType lidarType, bool repeat, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr)
+TanwayLidarSDK<PointT>::TanwayLidarSDK(std::string pcapPath, std::string lidarIPForFilter, int localPointCloudPortForFilter, int localDIFPortForFilter, TWLidarType lidarType, bool repeat, std::shared_ptr<DecodePackage<PointT>> decodePackagePtr)
 {
 	m_packageCache = std::make_shared<PackageCache>();
-	m_pcapReaderPtr = std::make_shared<PcapReader>(pcapPath, lidarIPForFilter, localPortForFilter, *m_packageCache, repeat, &m_mutexE);
+	m_pcapReaderPtr = std::make_shared<PcapReader>(pcapPath, lidarIPForFilter, localPointCloudPortForFilter, localDIFPortForFilter, *m_packageCache, repeat, &m_mutexE);
 	if (!decodePackagePtr)
 	{
 		m_decodePackagePtr = std::make_shared<DecodePackage<PointT>>(m_packageCache, lidarType, &m_mutexE);
@@ -211,6 +217,12 @@ template <typename PointT>
 void TanwayLidarSDK<PointT>::RegGPSCallback(const std::function<void(const std::string&)>& callback)
 {
 	m_decodePackagePtr->RegGPSCallback(callback);
+}
+
+template <typename PointT>
+void TanwayLidarSDK<PointT>::RegIMUDataCallback(const std::function<void(const TWIMUData&)>& callback)
+{
+	m_decodePackagePtr->RegIMUDataCallback(callback);
 }
 
 template <typename PointT>

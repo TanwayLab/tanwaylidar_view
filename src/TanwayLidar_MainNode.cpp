@@ -16,9 +16,11 @@
 #include <pcl/point_types.h>
 #include <pcl/point_cloud.h>
 #include <pcl_ros/point_cloud.h> //use these to convert between PCL and ROS datatypes
+#include <sensor_msgs/Imu.h>
 #include <pcl/conversions.h>
 
 ros::Publisher rosPublisher; 
+ros::Publisher rosIMUPublisher; 
 
 struct TanwayPCLEXPoint
 {
@@ -65,13 +67,35 @@ void pointCloudCallback(TWPointCloud<TanwayPCLEXPoint>::Ptr twPointCloud)
 	cloud.width = twPointCloud->width;
 	cloud.height = twPointCloud->height;
 	cloud.header.frame_id = twPointCloud->frame_id;
+	cloud.header.stamp = twPointCloud->stamp;
 	cloud.points.assign(twPointCloud->m_pointData.begin(), twPointCloud->m_pointData.end());
 
 	//to ros point cloud
 	sensor_msgs::PointCloud2 rosPointCloud; 
 	pcl::toROSMsg(cloud, rosPointCloud); //convert between PCL and ROS datatypes
-	rosPointCloud.header.stamp = ros::Time::now(); //Get ROS system time
-	rosPublisher.publish(rosPointCloud); //Publish cloud
+	rosPublisher.publish(rosPointCloud); //Publish point cloud
+}
+
+void imuCallback(const TWIMUData& imu)
+{
+	/*
+	*Avoid directly operating the UI in the callback function.
+	*/
+	sensor_msgs::Imu imu_data;
+	uint32_t sec = imu.stamp/1000000;
+	uint32_t nsec = (imu.stamp - sec*1000000) * 1000;
+	imu_data.header.stamp =ros::Time(sec, nsec) ;
+	imu_data.header.frame_id = imu.frame_id;
+
+	imu_data.linear_acceleration.x = imu.linear_acceleration[0]; 
+	imu_data.linear_acceleration.y = imu.linear_acceleration[1];
+	imu_data.linear_acceleration.z = imu.linear_acceleration[2];
+
+	imu_data.angular_velocity.x = imu.angular_velocity[0]; 
+	imu_data.angular_velocity.y = imu.angular_velocity[1]; 
+	imu_data.angular_velocity.z = imu.angular_velocity[2];
+
+	rosIMUPublisher.publish(imu_data); //Publish IMU
 }
 
 void gpsCallback(std::string gps_value)
@@ -104,32 +128,25 @@ int main(int argc, char** argv)
 	ros::NodeHandle nh_private("~");
 
 	ROS_INFO( "tanway lidar viewer for ROS" );
-	ROS_INFO( "Update Date: 2022/04/20\n" );
 	ROS_INFO( "View in rviz");
 
 	//读取Launch配置文件
 	LaunchConfig launchConfig;
 	launchConfig.ReadLaunchParams(nh_private);
 	rosPublisher = nh.advertise<sensor_msgs::PointCloud2> (launchConfig.m_topic, 1);
+	rosIMUPublisher = nh.advertise<sensor_msgs::Imu> (launchConfig.m_imuTopic, 1);
 
-	TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPort, (TWLidarType)(launchConfig.m_lidarType));
+	TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPointCloudPort, launchConfig.m_localDIFPort, (TWLidarType)(launchConfig.m_lidarType));
 	lidar.RegPointCloudCallback(pointCloudCallback);
+	lidar.RegIMUDataCallback(imuCallback);
 	lidar.RegGPSCallback(gpsCallback);
 	lidar.RegExceptionCallback(exceptionCallback);
 	if (LT_TSP0332 == launchConfig.m_lidarType)
 		lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 	else if (LT_Scope192 == launchConfig.m_lidarType)
 		lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-	else if (LT_Duetto == launchConfig.m_lidarType)
-		{
-			lidar.SetCorrectionAngleToDuetto(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-			lidar.SetCorrectionMovementToDuetto(launchConfig.m_correctedMovementLX, launchConfig.m_correctedMovementLY, launchConfig.m_correctedMovementLZ, 
-												launchConfig.m_correctedMovementRX, launchConfig.m_correctedMovementRY, launchConfig.m_correctedMovementRZ);
-			lidar.SetMoveAngleToDuetto(launchConfig.m_leftMoveAngle, launchConfig.m_rightMoveAngle);
-		}
 	else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
 		lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-	
 	
 	lidar.Start();
 
