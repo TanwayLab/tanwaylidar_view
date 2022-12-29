@@ -2,6 +2,7 @@
 	<node pkg="tanwaylidar_view" name="TanwayLidar_MainNode" type="TanwayLidar_MainNode" output = "screen">
 		<param name="frame_id" type="string" value="TanwayTP" />
 		<param name="topic" type="string" value="/tanwaylidar_pointcloud" />
+		<param name="imu_topic" type="string" value="/tanwaylidar_imu" />
 		<param name="LidarType" type="int" value="6"/> 
 		
 		<!--本机IP地址-->

@@ -32,6 +32,7 @@ public:
 	int m_lidarPort = -1;
 	std::string m_frameID = "TanwayTP" ;
 	std::string m_topic = "/tanwaylidar_pointcloud" ;
+	std::string m_imuTopic = "/tanwaylidar_imu" ;
 
 	int m_lidarType = -1;
 

@@ -31,6 +31,7 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 
 	nh_private.param<std::string>("frame_id", m_frameID, "TanwayTP");
 	nh_private.param<std::string>("topic", m_topic, "/tanwaylidar_pointcloud");
+	nh_private.param<std::string>("imu_topic", m_imuTopic, "/tanwaylidar_imu");
 
 	nh_private.param<int>("LidarType", m_lidarType, -1);
 
