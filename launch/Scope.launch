@@ -7,7 +7,7 @@
 		<!--本机IP地址-->
 		<param name="LocalHost" type="string" value="192.168.111.204" />
 		<!--本机接收雷达数据的端口号-->
-		<param name="LocalPort" type="int" value="5600" />
+		<param name="LocalPointloudPort" type="int" value="5600" />
 		<!--l雷达设备的IP地址-->
 		<param name="LidarHost" type="string" value="192.168.111.51" />
 		<!--雷达设备发送端的端口号-->
