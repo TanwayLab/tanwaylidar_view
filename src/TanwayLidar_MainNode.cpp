@@ -136,7 +136,9 @@ int main(int argc, char** argv)
 	rosPublisher = nh.advertise<sensor_msgs::PointCloud2> (launchConfig.m_topic, 1);
 	rosIMUPublisher = nh.advertise<sensor_msgs::Imu> (launchConfig.m_imuTopic, 1);
 
-	TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPointCloudPort, launchConfig.m_localDIFPort, (TWLidarType)(launchConfig.m_lidarType));
+	
+	TanwayLidarSDK<TanwayPCLEXPoint> lidar("/home/lnn/tanwaylidar_driver/jiequ.pcap", "192.168.111.51", 5600, 5700, LT_Duetto, true);
+	//TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPointCloudPort, launchConfig.m_localDIFPort, (TWLidarType)(launchConfig.m_lidarType));
 	lidar.RegPointCloudCallback(pointCloudCallback);
 	lidar.RegIMUDataCallback(imuCallback);
 	lidar.RegGPSCallback(gpsCallback);
@@ -147,7 +149,10 @@ int main(int argc, char** argv)
 		lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 	else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
 		lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-	
+	else if (LT_Duetto == launchConfig.m_lidarType)
+		lidar.SetCorrectKBValueToDuetto(launchConfig.m_kValue, launchConfig.m_bValue);
+
+
 	lidar.Start();
 
 	while (ros::ok())
