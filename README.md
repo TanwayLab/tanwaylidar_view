@@ -140,3 +140,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.1.0 | 2022年12月06日 | 更新跨平台SDK版本到1.1.0；取消Duetto.launch文件中对标定参数的配置，由SDK解析获取； |
 | tanwaylidar_view v2.1.1 | 2022年12月29日 | 更新跨平台SDK版本到1.1.1；增加对IMU数据的接收并推送ROS消息； |
 | tanwaylidar_view v2.1.2 | 2023年01月05日 | 修改设备launch文件配置，解决配置参数不生效问题； |
+| tanwaylidar_view v2.1.3 | 2023年01月10日 | 更新跨平台SDK版本到1.1.2；修改Duetto设备型号的launch文件配置，增加K、B值设置参数； |

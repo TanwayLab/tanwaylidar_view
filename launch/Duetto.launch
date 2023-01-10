@@ -15,6 +15,10 @@
 		<param name="LidarHost" type="string" value="192.168.111.51" />
 		<!--雷达设备发送端的端口号-->
 		<param name="LidarPort" type="int" value="5050" />
+
+		<!--K、B值配置-->>
+		<param name="KValue" type="double" value="1.0"/>
+		<param name="BValue" type="double" value="0.0"/>
 		
 	</node>
 
