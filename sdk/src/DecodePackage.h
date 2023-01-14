@@ -227,6 +227,8 @@ protected:
 	double m_correction_movement_R[3] = {-0.017, 0, 0};
 	double m_kValue = 1.0;
 	double m_bValue = 0.0;
+	double m_rotateSinRotateZ = 0.0;
+	double m_rotateCosRotateZ = 1.0;
 
 
 private:
@@ -611,7 +613,8 @@ void DecodePackage<PointT>::InitBasicVariables()
 	m_rotate_duetto_cosL = cos(m_leftMoveAngle * m_calRA);  //
 	m_rotate_duetto_sinR = sin(m_rightMoveAngle * m_calRA);  //
 	m_rotate_duetto_cosR = cos(m_rightMoveAngle * m_calRA);  //
-
+	m_rotateSinRotateZ = sin((-90.0) * m_calRA);
+	m_rotateCosRotateZ = cos((-90.0) * m_calRA);
 }
 
 template <typename PointT>
@@ -1401,9 +1404,15 @@ void DecodePackage<PointT>::UseDecodeDuetto(char* udpData, std::vector<TWPointDa
 
 			//echo 1
 			{
-				basic_point.x = L_1 * x_t + x_move;
-				basic_point.y = L_1 * y_t + y_move;
-				basic_point.z = L_1 * z_t + z_move;
+				double x_tmp = L_1 * x_t + x_move;
+				double y_tmp = L_1 * y_t + y_move;
+				double z_tmp = L_1 * z_t + z_move;
+
+				//rotate Z
+				basic_point.x = x_tmp * m_rotateCosRotateZ - y_tmp * m_rotateSinRotateZ;
+				basic_point.y = x_tmp * m_rotateSinRotateZ + y_tmp * m_rotateCosRotateZ;
+				basic_point.z = z_tmp;
+
 
 				basic_point.distance = L_1;
 				int tmpIntensity = (int)((m_kValue * pulse_1 + m_bValue)* 256.0 * 0.06667 + 0.5);
@@ -1418,9 +1427,16 @@ void DecodePackage<PointT>::UseDecodeDuetto(char* udpData, std::vector<TWPointDa
 			//echo2
 			/*
 			{
-				basic_point.x = L_2 * x_t + x_move;
-				basic_point.y = L_2 * y_t + y_move;
-				basic_point.z = L_2 * z_t + z_move;
+				double x_tmp = L_2 * x_t + x_move;
+				double y_tmp = L_2 * y_t + y_move;
+				double z_tmp = L_2 * z_t + z_move;
+
+				//rotate Z
+				basic_point.x = x_tmp * m_rotateCosRotateZ - y_tmp * m_rotateSinRotateZ;
+				basic_point.y = x_tmp * m_rotateSinRotateZ + y_tmp * m_rotateCosRotateZ;
+				basic_point.z = z_tmp;
+
+
 
 				basic_point.distance = L_2;
 				int tmpIntensity = (int)((m_kValue * pulse_2 + m_bValue)* 256.0 * 0.06667 + 0.5);
@@ -1894,8 +1910,8 @@ void DecodePackage<PointT>::DecodeDuetto(char* udpData)
 		if (oriPoint.distance <= 0) continue;
 
 		PointT basic_point;
-		setX(basic_point, static_cast<float>(oriPoint.y));
-		setY(basic_point, static_cast<float>(oriPoint.x));
+		setX(basic_point, static_cast<float>(oriPoint.x));
+		setY(basic_point, static_cast<float>(oriPoint.y));
 		setZ(basic_point, static_cast<float>(oriPoint.z));
 		setIntensity(basic_point, static_cast<float>(oriPoint.pulse));
 		setChannel(basic_point, oriPoint.channel);
