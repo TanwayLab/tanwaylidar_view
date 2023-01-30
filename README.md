@@ -142,3 +142,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.1.2 | 2023年01月05日 | 修改设备launch文件配置，解决配置参数不生效问题； |
 | tanwaylidar_view v2.1.3 | 2023年01月10日 | 更新跨平台SDK版本到1.1.2；修改Duetto设备型号的launch文件配置，增加K、B值设置参数； |
 | tanwaylidar_view v2.1.4 | 2023年01月10日 | 更新跨平台SDK版本到1.1.3； |
+| tanwaylidar_view v2.1.5 | 2023年01月30日 | 更新跨平台SDK版本到1.1.4； |
