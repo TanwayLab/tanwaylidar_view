@@ -145,4 +145,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.1.4.0 | 2023年01月13日 | Duetto设备型号解析时x、y轴对调； |
 | tanwaylidar_view v2.1.4.0.1 | 2023年01月14日 | Duetto设备型号修改坐标系方向：X轴向前，Y轴向左，Z轴向上 |
 | tanwaylidar_view v2.1.5.0 | 2023年01月30日 | 更新tanwaylidar_view版本到v2.1.5； |
-| tanwaylidar_view v2.1.5.1 | 2023年02月17日 | 去除Duetto设备解析时的K、B值接口设置，使用原始值计算脉宽数据 |
+| tanwaylidar_view v2.1.5.0.1 | 2023年02月17日 | 去除Duetto设备解析时的K、B值接口设置，使用原始值计算脉宽数据 |
