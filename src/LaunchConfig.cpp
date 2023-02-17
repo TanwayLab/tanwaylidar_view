@@ -55,7 +55,5 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.1);
 		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.2);
 	}
-	
-
 }
 

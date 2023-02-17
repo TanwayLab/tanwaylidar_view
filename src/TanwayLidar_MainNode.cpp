@@ -148,7 +148,6 @@ int main(int argc, char** argv)
 	else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
 		lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 
-
 	lidar.Start();
 
 	while (ros::ok())

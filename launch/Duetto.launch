@@ -14,7 +14,7 @@
 		<!--l雷达设备的IP地址-->
 		<param name="LidarHost" type="string" value="192.168.111.51" />
 		<!--雷达设备发送端的端口号-->
-		<param name="LidarPort" type="int" value="5050" />		
+		<param name="LidarPort" type="int" value="5050" />	
 	</node>
 
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find tanwaylidar_view)/rviz/tanwayrun.rviz" />

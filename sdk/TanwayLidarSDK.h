@@ -81,7 +81,6 @@ public:
 	void SetCorrectedAngleToTSP0332(float angle1, float angle2);
 	void SetCorrectedAngleToScope192(float angle1, float angle2, float angle3);
 	void SetCorrectionAngleToScopeMiniA2_192(float angle1, float angle2, float angle3);
-
 	/*
 	*Register the point cloud callback function.
 	*/

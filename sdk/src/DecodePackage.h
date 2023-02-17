@@ -1402,7 +1402,6 @@ void DecodePackage<PointT>::UseDecodeDuetto(char* udpData, std::vector<TWPointDa
 				basic_point.y = x_tmp * m_rotateSinRotateZ + y_tmp * m_rotateCosRotateZ;
 				basic_point.z = z_tmp;
 
-
 				basic_point.distance = L_1;
 				basic_point.pulse = pulse_1;
 				basic_point.echo = 1;/*  */

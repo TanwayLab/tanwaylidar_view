@@ -39,6 +39,7 @@ public:
 	double m_correctedAngle1 = 0;
 	double m_correctedAngle2 = 0;
 	double m_correctedAngle3 = 0;
+	
 };
 
 #endif
