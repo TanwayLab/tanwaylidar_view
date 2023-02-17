@@ -81,7 +81,6 @@ public:
 	void SetCorrectedAngleToTSP0332(float angle1, float angle2);
 	void SetCorrectedAngleToScope192(float angle1, float angle2, float angle3);
 	void SetCorrectionAngleToScopeMiniA2_192(float angle1, float angle2, float angle3);
-	void SetCorrectKBValueToDuetto(double k, double b);
 
 	/*
 	*Register the point cloud callback function.
@@ -162,12 +161,6 @@ void TanwayLidarSDK<PointT>::PausePcap(bool pause)
 {
 	if (m_pcapReaderPtr)
 		m_pcapReaderPtr->PausePcap(pause);
-}
-
-template <typename PointT>
-void TanwayLidarSDK<PointT>::SetCorrectKBValueToDuetto(double k, double b)
-{
-	m_decodePackagePtr->SetCorrectKBValueToDuetto(k, b);
 }
 
 template <typename PointT>
