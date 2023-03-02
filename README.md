@@ -47,16 +47,16 @@ cd ~/tanwaylidar_driver && catkin_make
      	<!--连接模式:仅支持"on-line"、"off-line"两种模式配置-->
      	<param name="ConnectType" type="string" value="on-line" />
      
-         <!--实时模式下配置-->
-         <!--本机IP地址-->
-         <param name="LocalHost" type="string" value="192.168.111.204" />
+     	<!--实时模式下配置-->
+     	<!--本机IP地址-->
+     	<param name="LocalHost" type="string" value="192.168.111.204" />
      
-         <!--雷达设备的IP地址-->
-         <param name="LidarHost" type="string" value="192.168.111.51" />
-         <!--雷达发送点云数据的目的端口（即设备接收点云数据的端口）-->
-         <param name="LocalPointloudPort" type="int" value="5600" />
-         <!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
-         <param name="LocalDIFPort" type="int" value="5700" />
+     	<!--雷达设备的IP地址-->
+     	<param name="LidarHost" type="string" value="192.168.111.51" />
+     	<!--雷达发送点云数据的目的端口（即设备接收点云数据的端口）-->
+     	<param name="LocalPointloudPort" type="int" value="5600" />
+     	<!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
+     	<param name="LocalDIFPort" type="int" value="5700" />
      ```
 
    - 回放雷达数据参数配置示例（仅支持读取pcap文件，以Duetto设备型号为例）
@@ -65,16 +65,16 @@ cd ~/tanwaylidar_driver && catkin_make
      	<!--连接模式:仅支持"on-line"、"off-line"两种模式配置-->
      	<param name="ConnectType" type="string" value="off-line" />
      
-         <!--回放模式下配置-->
-         <!--PCAP文件绝对路径-->
-         <param name="PcapFilePath" type="string" value="/home/tanway/lidar_data/duetto.pcap" />
+     	<!--回放模式下配置-->
+     	<!--PCAP文件绝对路径-->
+     	<param name="PcapFilePath" type="string" value="/home/tanway/lidar_data/duetto.pcap" />
      
-         <!--雷达设备的IP地址-->
-         <param name="LidarHost" type="string" value="192.168.111.51" />
-         <!--雷达发送点云数据的目的端口（即设备接收点云数据的端口）-->
-         <param name="LocalPointloudPort" type="int" value="5600" />
-         <!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
-         <param name="LocalDIFPort" type="int" value="5700" />
+     	<!--雷达设备的IP地址-->
+     	<param name="LidarHost" type="string" value="192.168.111.51" />
+     	<!--雷达发送点云数据的目的端口（即设备接收点云数据的端口）-->
+     	<param name="LocalPointloudPort" type="int" value="5600" />
+     	<!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
+     	<param name="LocalDIFPort" type="int" value="5700" />
      ```
 
 6. 设置环境变量
