@@ -50,7 +50,7 @@ POINT_CLOUD_REGISTER_POINT_STRUCT(TanwayPCLEXPoint,
                                  )
 
 
-void pointCloudCallback(TWPointCloud<TanwayPCLEXPoint>::Ptr twPointCloud)
+void pointCloudCallback(TWPointCloud<TanwayPCLEXPoint>::Ptr twPointCloud, bool lostPacket)
 {
 	/*
 	*The point cloud struct uses a smart pointer. 
@@ -71,7 +71,7 @@ void pointCloudCallback(TWPointCloud<TanwayPCLEXPoint>::Ptr twPointCloud)
 	cloud.points.assign(twPointCloud->m_pointData.begin(), twPointCloud->m_pointData.end());
 
 	//to ros point cloud
-	sensor_msgs::PointCloud2 rosPointCloud; 
+	sensor_msgs::PointCloud2 rosPointCloud;
 	pcl::toROSMsg(cloud, rosPointCloud); //convert between PCL and ROS datatypes
 	rosPublisher.publish(rosPointCloud); //Publish point cloud
 }
@@ -135,28 +135,53 @@ int main(int argc, char** argv)
 	launchConfig.ReadLaunchParams(nh_private);
 	rosPublisher = nh.advertise<sensor_msgs::PointCloud2> (launchConfig.m_topic, 1);
 	rosIMUPublisher = nh.advertise<sensor_msgs::Imu> (launchConfig.m_imuTopic, 1);
-
-	TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPointCloudPort, launchConfig.m_localDIFPort, (TWLidarType)(launchConfig.m_lidarType));
-	lidar.RegPointCloudCallback(pointCloudCallback);
-	lidar.RegIMUDataCallback(imuCallback);
-	lidar.RegGPSCallback(gpsCallback);
-	lidar.RegExceptionCallback(exceptionCallback);
-	if (LT_TSP0332 == launchConfig.m_lidarType)
-		lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
-	else if (LT_Scope192 == launchConfig.m_lidarType)
-		lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-	else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
-		lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-	else if (LT_Duetto == launchConfig.m_lidarType)
-		lidar.SetCorrectKBValueToDuetto(launchConfig.m_kValue, launchConfig.m_bValue);
-
-
-	lidar.Start();
-
-	while (ros::ok())
+	
+	//on-line
+	if ("on-line" == launchConfig.m_connectType)
 	{
-		std::this_thread::sleep_for(std::chrono::seconds(1));
-	}
+		TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_lidarHost, launchConfig.m_localHost, launchConfig.m_localPointCloudPort, launchConfig.m_localDIFPort, (TWLidarType)(launchConfig.m_lidarType));
+		lidar.RegPointCloudCallback(pointCloudCallback);
+		lidar.RegIMUDataCallback(imuCallback);
+		lidar.RegGPSCallback(gpsCallback);
+		lidar.RegExceptionCallback(exceptionCallback);
+		if (LT_TSP0332 == launchConfig.m_lidarType)
+			lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
+		else if (LT_Scope192 == launchConfig.m_lidarType)
+			lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
+		else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
+			lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 
-	return 0;
+		lidar.Start();
+
+		while (ros::ok())
+		{
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+		}
+
+		return 0;
+	}
+	//off-line
+	else
+	{
+		TanwayLidarSDK<TanwayPCLEXPoint> lidar(launchConfig.m_filePath, launchConfig.m_lidarHost, launchConfig.m_localPointCloudPort, launchConfig.m_localDIFPort, (TWLidarType)(launchConfig.m_lidarType), true);
+		lidar.RegPointCloudCallback(pointCloudCallback);
+		lidar.RegIMUDataCallback(imuCallback);
+		lidar.RegGPSCallback(gpsCallback);
+		lidar.RegExceptionCallback(exceptionCallback);
+		if (LT_TSP0332 == launchConfig.m_lidarType)
+			lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
+		else if (LT_Scope192 == launchConfig.m_lidarType)
+			lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
+		else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
+			lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
+
+		lidar.Start();
+
+		while (ros::ok())
+		{
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+		}
+
+		return 0;
+	}
 }
