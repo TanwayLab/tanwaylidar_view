@@ -29,7 +29,7 @@ cd ~/tanwaylidar_driver/src
 git clone https://github.com/tanwayLab/tanwaylidar_view.git
 ```
 
-输入用户名密码，下载成功后，~/tanwaylidar_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到~/tanwaylidar_driver/src文件夹下。
+输入用户名密码，下载成功后，\~/tanwaylidar_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到\~/tanwaylidar_driver/src文件夹下。
 
 4. 编译程序
 
