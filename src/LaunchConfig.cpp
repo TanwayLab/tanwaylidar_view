@@ -37,6 +37,14 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 
 	nh_private.param<int>("LidarType", m_lidarType, -1);
 
+	//transform
+	nh_private.param<double>("TransformRotateX", m_transformRotateX, 0);
+	nh_private.param<double>("TransformRotateY", m_transformRotateY, 0);
+	nh_private.param<double>("TransformRotateZ", m_transformRotateZ, 0);
+	nh_private.param<double>("TransformMoveX", m_transformMoveX, 0);
+	nh_private.param<double>("TransformMoveY", m_transformMoveY, 0);
+	nh_private.param<double>("TransformMoveZ", m_transformMoveZ, 0);
+
 	//TSP03-32
 	if (LT_TSP0332 == m_lidarType)
 	{

@@ -41,6 +41,14 @@ public:
 	double m_correctedAngle1 = 0;
 	double m_correctedAngle2 = 0;
 	double m_correctedAngle3 = 0;
+
+	//transform
+	double m_transformRotateX = 0;
+	double m_transformRotateY = 0;
+	double m_transformRotateZ = 0;
+	double m_transformMoveX = 0;
+	double m_transformMoveY = 0;
+	double m_transformMoveZ = 0;
 };
 
 #endif

@@ -144,6 +144,14 @@ int main(int argc, char** argv)
 		lidar.RegIMUDataCallback(imuCallback);
 		lidar.RegGPSCallback(gpsCallback);
 		lidar.RegExceptionCallback(exceptionCallback);
+		lidar.SetTransform(
+			launchConfig.m_transformRotateX, 
+			launchConfig.m_transformRotateY, 
+			launchConfig.m_transformRotateZ,
+			launchConfig.m_transformMoveX,
+			launchConfig.m_transformMoveY,
+			launchConfig.m_transformMoveZ
+		);
 		if (LT_TSP0332 == launchConfig.m_lidarType)
 			lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 		else if (LT_Scope192 == launchConfig.m_lidarType)
@@ -168,6 +176,14 @@ int main(int argc, char** argv)
 		lidar.RegIMUDataCallback(imuCallback);
 		lidar.RegGPSCallback(gpsCallback);
 		lidar.RegExceptionCallback(exceptionCallback);
+		lidar.SetTransform(
+			launchConfig.m_transformRotateX, 
+			launchConfig.m_transformRotateY, 
+			launchConfig.m_transformRotateZ,
+			launchConfig.m_transformMoveX,
+			launchConfig.m_transformMoveY,
+			launchConfig.m_transformMoveZ
+		);
 		if (LT_TSP0332 == launchConfig.m_lidarType)
 			lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 		else if (LT_Scope192 == launchConfig.m_lidarType)

@@ -24,6 +24,14 @@
 		<!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
 		<param name="LocalDIFPort" type="int" value="5700" />
 
+		<!--点云数据变换参数配置-->
+		<param name="TransformRotateX" type="double" value="0.0" />	
+		<param name="TransformRotateY" type="double" value="0.0" />	
+		<param name="TransformRotateZ" type="double" value="0.0" />	
+		<param name="TransformMoveX" type="double" value="0.0" />	
+		<param name="TransformMoveY" type="double" value="0.0" />	
+		<param name="TransformMoveZ" type="double" value="0.0" />	
+
 	</node>
 
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find tanwaylidar_view)/rviz/tanwayrun.rviz" />
