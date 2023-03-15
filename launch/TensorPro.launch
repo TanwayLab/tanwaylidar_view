@@ -2,16 +2,35 @@
 	<node pkg="tanwaylidar_view" name="TanwayLidar_MainNode" type="TanwayLidar_MainNode" output = "screen">
 		<param name="frame_id" type="string" value="TanwayTP" />
 		<param name="topic" type="string" value="/tanwaylidar_pointcloud" />
+		<param name="imu_topic" type="string" value="/tanwaylidar_imu" />
 		<param name="LidarType" type="int" value="1"/> 
-		
+
+		<!--连接模式:仅支持"on-line"、"off-line"两种模式配置-->
+		<param name="ConnectType" type="string" value="on-line" />
+
+		<!--实时模式下配置-->
 		<!--本机IP地址-->
 		<param name="LocalHost" type="string" value="192.168.111.204" />
-		<!--本机接收雷达数据的端口号-->
-		<param name="LocalPointloudPort" type="int" value="5600" />
-		<!--l雷达设备的IP地址-->
+
+		<!--回放模式下配置-->
+		<!--PCAP文件绝对路径-->
+		<param name="PcapFilePath" type="string" value="/home/tanway/lidar_data/tensor.pcap" />
+		
+		
+		<!--雷达设备的IP地址-->
 		<param name="LidarHost" type="string" value="192.168.111.51" />
-		<!--雷达设备发送端的端口号-->
-		<param name="LidarPort" type="int" value="5050" />
+		<!--雷达发送点云数据的目的端口（即设备接收点云数据的端口）-->
+		<param name="LocalPointloudPort" type="int" value="5600" />
+		<!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
+		<param name="LocalDIFPort" type="int" value="5700" />
+
+		<!--点云数据变换参数配置-->
+		<param name="TransformRotateX" type="double" value="0.0" />	
+		<param name="TransformRotateY" type="double" value="0.0" />	
+		<param name="TransformRotateZ" type="double" value="0.0" />	
+		<param name="TransformMoveX" type="double" value="0.0" />	
+		<param name="TransformMoveY" type="double" value="0.0" />	
+		<param name="TransformMoveZ" type="double" value="0.0" />	
 
 	</node>
 

@@ -5,4 +5,5 @@
 # pyc files #
 *.pyc
 *.rviz
+.vscode
 LICENSE

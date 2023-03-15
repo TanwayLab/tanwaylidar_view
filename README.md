@@ -23,26 +23,66 @@ mkdir -p ~/tanwaylidar_driver/src
 cd ~/tanwaylidar_driver/src
 ```
 
-1. 下载代码
+3. 下载代码
 
 ```bash
 git clone https://github.com/tanwayLab/tanwaylidar_view.git
 ```
 
-输入用户名密码，下载成功后，～/tanwaylidar_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到/tanwaylidar_driver/src文件夹下。
+输入用户名密码，下载成功后，\~/tanwaylidar_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到\~/tanwaylidar_driver/src文件夹下。
 
-1. 编译程序
+4. 编译程序
 
-```bash
+```
 cd ~/tanwaylidar_driver && catkin_make
 ```
 
-1. 设置环境变量
+5. 配置.launch文件（雷达连接参数）
 
-```bash
-echo "source ~/tanwaylidar_driver/devel/setup.bash" >> ~/.bashrc
-source ~/.bashrc
-```
+   在路径~/tanwaylidar_driver/src/tanwaylidar_view/launch/下找到对应设备型号的.launch文件进行如下修改：
+
+   - 实时连接参数配置示例（即直接连接雷达使用，以Duetto设备型号为例）
+
+     ```xml
+     	<!--连接模式:仅支持"on-line"、"off-line"两种模式配置-->
+     	<param name="ConnectType" type="string" value="on-line" />
+     
+     	<!--实时模式下配置-->
+     	<!--本机IP地址-->
+     	<param name="LocalHost" type="string" value="192.168.111.204" />
+     
+     	<!--雷达设备的IP地址-->
+     	<param name="LidarHost" type="string" value="192.168.111.51" />
+     	<!--雷达发送点云数据的目的端口（即设备接收点云数据的端口）-->
+     	<param name="LocalPointloudPort" type="int" value="5600" />
+     	<!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
+     	<param name="LocalDIFPort" type="int" value="5700" />
+     ```
+
+   - 回放雷达数据参数配置示例（仅支持读取pcap文件，以Duetto设备型号为例）
+
+     ```xml
+     	<!--连接模式:仅支持"on-line"、"off-line"两种模式配置-->
+     	<param name="ConnectType" type="string" value="off-line" />
+     
+     	<!--回放模式下配置-->
+     	<!--PCAP文件绝对路径-->
+     	<param name="PcapFilePath" type="string" value="/home/tanway/lidar_data/duetto.pcap" />
+     
+     	<!--雷达设备的IP地址-->
+     	<param name="LidarHost" type="string" value="192.168.111.51" />
+     	<!--雷达发送点云数据的目的端口（即设备接收点云数据的端口）-->
+     	<param name="LocalPointloudPort" type="int" value="5600" />
+     	<!--雷达发送DIF数据的目的端口（即设备接收DIF数据的端口）-->
+     	<param name="LocalDIFPort" type="int" value="5700" />
+     ```
+
+6. 设置环境变量
+
+   ```bash
+   echo "source ~/tanwaylidar_driver/devel/setup.bash" >> ~/.bashrc
+   source ~/.bashrc
+   ```
 
 # 点云显示软件使用
 
@@ -143,3 +183,5 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v2.1.3 | 2023年01月10日 | 更新跨平台SDK版本到1.1.2；修改Duetto设备型号的launch文件配置，增加K、B值设置参数； |
 | tanwaylidar_view v2.1.4 | 2023年01月10日 | 更新跨平台SDK版本到1.1.3； |
 | tanwaylidar_view v2.1.5 | 2023年01月30日 | 更新跨平台SDK版本到1.1.4； |
+| tanwaylidar_view v3.0.0 | 2023年03月02日 | 更新跨平台SDK版本到2.0.0；<br />增加实时模式、回放模式的功能，实现在launch文件中进行配置；<br />点云数据输出接口增加丢包状态标志； |
+| tanwaylidar_view v3.0.1 | 2023年03月14日 | 更新跨平台SDK版本到2.0.1；<br />增加各雷达型号.launch配置文件中的点云空间变换配置参数； |

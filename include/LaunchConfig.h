@@ -25,11 +25,13 @@ public:
 	void ReadLaunchParams(ros::NodeHandle& nh_private);
 
 public:
+	std::string m_connectType = "";
+	std::string m_filePath = "";
 	std::string m_localHost = "" ;
 	std::string m_lidarHost = "" ;
 	int m_localPointCloudPort = -1;
 	int m_localDIFPort = -1;
-	int m_lidarPort = -1;
+	//int m_lidarPort = -1;
 	std::string m_frameID = "TanwayTP" ;
 	std::string m_topic = "/tanwaylidar_pointcloud" ;
 	std::string m_imuTopic = "/tanwaylidar_imu" ;
@@ -40,8 +42,13 @@ public:
 	double m_correctedAngle2 = 0;
 	double m_correctedAngle3 = 0;
 
-	double m_kValue = 1.0;
-	double m_bValue = 0.0;
+	//transform
+	double m_transformRotateX = 0;
+	double m_transformRotateY = 0;
+	double m_transformRotateZ = 0;
+	double m_transformMoveX = 0;
+	double m_transformMoveY = 0;
+	double m_transformMoveZ = 0;
 };
 
 #endif
