@@ -156,7 +156,7 @@ int main(int argc, char** argv)
 			lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 		else if (LT_Scope192 == launchConfig.m_lidarType)
 			lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-		else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
+		else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType || LT_TempoA2 == launchConfig.m_lidarType)
 			lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 
 		lidar.Start();
@@ -188,7 +188,7 @@ int main(int argc, char** argv)
 			lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 		else if (LT_Scope192 == launchConfig.m_lidarType)
 			lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
-		else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType)
+		else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType || LT_TempoA2 == launchConfig.m_lidarType)
 			lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 
 		lidar.Start();
