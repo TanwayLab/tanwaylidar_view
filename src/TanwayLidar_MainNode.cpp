@@ -152,6 +152,7 @@ int main(int argc, char** argv)
 			launchConfig.m_transformMoveY,
 			launchConfig.m_transformMoveZ
 		);
+		
 		if (LT_TSP0332 == launchConfig.m_lidarType)
 			lidar.SetCorrectedAngleToTSP0332(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2);
 		else if (LT_Scope192 == launchConfig.m_lidarType)
