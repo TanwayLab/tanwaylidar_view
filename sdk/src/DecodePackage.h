@@ -91,6 +91,7 @@ public:
 	virtual ~DecodePackage();
 
 	void Start();
+	void Stop();
 	void RegPointCloudCallback(const std::function<void(typename TWPointCloud<PointT>::Ptr, bool)>& callback);
 	void RegGPSCallback(const std::function<void(const std::string&)>& callback);
 	void RegIMUDataCallback(const std::function<void(const TWIMUData&)>& callback);
@@ -119,7 +120,7 @@ private:
 	void DecodeTempoA2(char* udpData);
 	void DecodeDuetto(char* udpData);
 	void DecodeTSP48Polar(char* udpData);
-	
+
 
 	void DecodeGPSData(char* udpData);	//decode gps date
 	void DecodeDIFData_Duetto(char* udpData);
@@ -150,8 +151,8 @@ protected:
 	inline void CalculateRotateAllPointCloud(TWPointData& point);
 
 public:
-	double m_startAngle = 32.0;
-	double m_endAngle = 152.0;
+	double m_startAngle = 30.0;
+	double m_endAngle = 150.0;
 	
 protected:
 	double m_firstSeparateAngle = -1;
@@ -597,6 +598,17 @@ void DecodePackage<PointT>::Start()
 }
 
 template <typename PointT>
+void DecodePackage<PointT>::Stop()
+{
+	run_decode.store(false);
+
+	while (!run_exit)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	}
+}
+
+template <typename PointT>
 DecodePackage<PointT>::DecodePackage(std::shared_ptr<PackageCache> packageCachePtr, TWLidarType lidarType, std::mutex* mutex): 
 	m_packageCachePtr(packageCachePtr), m_lidarType(lidarType), m_mutex(mutex)
 {
@@ -715,13 +727,7 @@ void DecodePackage<PointT>::InitBasicVariables()
 template <typename PointT>
 DecodePackage<PointT>::~DecodePackage()
 {
-	//std::this_thread::sleep_for(std::chrono::seconds(1));
-	run_decode.store(false);
-
-	while (!run_exit)
-	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	}
+	Stop();
 }
 
 template <typename PointT>
@@ -1735,6 +1741,7 @@ void DecodePackage<PointT>::UseDecodeDuetto(char* udpData, std::vector<TWPointDa
 	}
 }
 
+
 template <typename PointT>
 void DecodePackage<PointT>::UseDecodeTSP48Polar(char* udpData, std::vector<TWPointData>& pointCloud)
 {
@@ -1981,6 +1988,7 @@ void DecodePackage<PointT>::DecodeDIFData_Duetto(char* udpData)
 		//std::cout << "PivotVector: Z, " << pivotVectorZ << std::endl;
 	}
 }
+
 
 template <typename PointT>
 void DecodePackage<PointT>::DecodeDIFData_TSP48Polar(char* udpData)
