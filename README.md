@@ -186,4 +186,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v3.0.0 | 2023年03月02日 | 更新跨平台SDK版本到2.0.0；<br />增加实时模式、回放模式的功能，实现在launch文件中进行配置；<br />点云数据输出接口增加丢包状态标志； |
 | tanwaylidar_view v3.0.1 | 2023年03月14日 | 更新跨平台SDK版本到2.0.1；<br />增加各雷达型号.launch配置文件中的点云空间变换配置参数； |
 | tanwaylidar_view v3.0.2 | 2023年03月24日 | 更新跨平台SDK版本到2.0.2；<br />增加Tempo-A2设备型号的支持； |
-| tanwaylidar_view v3.0.3 | 2023年05月04日 | 更新跨平台SDK版本到2.0.3；<br />增加TSP48-Polar设备型号的支持； |
+| tanwaylidar_view v3.0.3 | 2023年05月04日 | 更新跨平台SDK版本到2.0.4；<br />增加TSP48-Polar设备型号的支持； |
