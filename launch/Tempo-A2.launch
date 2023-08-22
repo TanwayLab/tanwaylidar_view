@@ -14,7 +14,7 @@
 
 		<!--回放模式下配置-->
 		<!--PCAP文件绝对路径-->
-		<param name="PcapFilePath" type="string" value="/home/lnn/tanwaylidar_driver/lidar_data/scopeminiA2.pcap" />
+		<param name="PcapFilePath" type="string" value="/home/lnn/tanwaylidar_driver/lidar_data/Tempo-A2.pcap" />
 		
 		
 		<!--雷达设备的IP地址-->
