@@ -189,3 +189,4 @@ rosrun tanwaylidar_view tensorpro_interfaces
 | tanwaylidar_view v3.0.3 | 2023年05月04日 | 更新跨平台SDK版本到2.0.4；<br />增加TSP48-Polar设备型号的支持； |
 | tanwaylidar_view v3.0.4 | 2023年08月07日 | 更新跨平台SDK版本到2.0.5； |
 | tanwaylidar_view v3.0.5 | 2023年08月22日 | 更新跨平台SDK版本到2.0.6；<br />增加Scope256设备型号.launch配置文件的支持； |
+| tanwaylidar_view v3.0.6 | 2023年08月29日 | 更新跨平台SDK版本到2.0.7； |
