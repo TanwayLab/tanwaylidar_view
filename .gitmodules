@@ -1,0 +1,3 @@
+[submodule "TanwayLidarSDK"]
+	path = TanwayLidarSDK
+	url = git@172.20.4.22:tanwayrd/TanwayLidarSDK.git
