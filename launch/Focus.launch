@@ -38,6 +38,17 @@
 		<param name="CorrectedAngle2" type="double" value="0.1" />	
 		<!--组修正角度值3-->
 		<param name="CorrectedAngle3" type="double" value="0.2" />	
+
+		<!--是否开启拼接处理-->
+		<param name="bJointabc" type="bool" value="false" />
+		<!--分割节点1-->
+		<param name="jointabc_node1" type="double" value="1.0" />
+		<!--分割节点2-->
+		<param name="jointabc_node2" type="double" value="10.0" />
+		<!--单面区（近）A:1, B:2, C:3-->
+		<param name="jointabc_one_face" type="int" value="1" />
+		<!--双面区（远）A+B:1, A+C:2, B+C:3-->
+		<param name="jointabc_two_face" type="int" value="1" />
 	</node>
 
 	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find tanwaylidar_view)/rviz/tanwayrun.rviz" />

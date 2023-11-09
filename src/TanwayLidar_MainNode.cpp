@@ -159,6 +159,8 @@ int main(int argc, char** argv)
 			lidar.SetCorrectedAngleToScope192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
 		else if (LT_ScopeMiniA2_192 == launchConfig.m_lidarType || LT_TempoA2 == launchConfig.m_lidarType)
 			lidar.SetCorrectionAngleToScopeMiniA2_192(launchConfig.m_correctedAngle1, launchConfig.m_correctedAngle2, launchConfig.m_correctedAngle3);
+		else if (LT_Focus == launchConfig.m_lidarType) 
+			lidar.SetJointabc(launchConfig.m_bJointabc, launchConfig.m_jointabc_node1,launchConfig.m_jointabc_node2, launchConfig.m_jointabc_one_face, launchConfig.m_jointabc_two_face); 
 
 		lidar.Start();
 

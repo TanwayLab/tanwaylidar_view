@@ -49,6 +49,13 @@ public:
 	double m_transformMoveX = 0;
 	double m_transformMoveY = 0;
 	double m_transformMoveZ = 0;
+
+	//jointabc
+	bool m_bJointabc = false;
+	double m_jointabc_node1 = 0;
+	double m_jointabc_node2 = 0;
+	int m_jointabc_one_face = 0;
+	int m_jointabc_two_face = 0;
 };
 
 #endif

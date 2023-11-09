@@ -65,5 +65,14 @@ void LaunchConfig::ReadLaunchParams(ros::NodeHandle& nh_private)
 		nh_private.param<double>("CorrectedAngle2", m_correctedAngle2, 0.1);
 		nh_private.param<double>("CorrectedAngle3", m_correctedAngle3, 0.2);
 	}
+	//Focus
+	else if (LT_Focus == m_lidarType)
+	{
+		nh_private.param<bool>("bJointabc", m_bJointabc, false);
+		nh_private.param<double>("jointabc_node1", m_jointabc_node1, 1.0);
+		nh_private.param<double>("jointabc_node2", m_jointabc_node2, 10.0);
+		nh_private.param<int>("jointabc_one_face", m_jointabc_one_face, 1);
+		nh_private.param<int>("jointabc_two_face", m_jointabc_two_face, 1);
+	}	
 }
 
