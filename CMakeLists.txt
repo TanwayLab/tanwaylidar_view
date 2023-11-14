@@ -4,6 +4,14 @@ project(tanwaylidar_view)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++14)
 
+if(NOT CMAKE_BUILD_TYPE)
+set(CMAKE_BUILD_TYPE Release)
+endif()
+set(CMAKE_CXX_FLAGS_RELEASE -Ofast)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -O3  -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3  -Wall")
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
