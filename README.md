@@ -1,4 +1,4 @@
-# tanwaylidar_view[v3.0.9]
+# tanwaylidar_view[v3.0.10]
 tanwaylidar_view 是探维科技针对所产雷达系列产品的上位机软件，在Ubuntu18.04环境下开发测试通过。
 
 软件需在ROS环境下使用，ROS安装参见[安装教程](http://wiki.ros.org/ROS/Installation "")。
