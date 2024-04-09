@@ -20,8 +20,6 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  rqt_gui
-  rqt_gui_py
 )
 
 ## System dependencies are found with CMake's conventions
@@ -115,7 +113,7 @@ catkin_python_setup()
 catkin_package(
    INCLUDE_DIRS include
 #  LIBRARIES tanwaylidar_view
-   CATKIN_DEPENDS roscpp pcl_ros std_msgs rqt_gui rqt_gui_py
+   CATKIN_DEPENDS roscpp pcl_ros std_msgs
 #  DEPENDS system_lib
 )
 

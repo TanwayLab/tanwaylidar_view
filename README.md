@@ -25,8 +25,13 @@ cd ~/tanwaylidar_driver/src
 
 3. 下载代码
 
+注意: 如需获取特定版本，请联系探维公司技术支持。
+
 ```bash
-git clone https://github.com/tanwayLab/tanwaylidar_view.git
+git clone https://github.com/TanwayLab/tanwaylidar_view.git
+cd tanwaylidar_view/sdk
+git submodule init
+git submodule update
 ```
 
 输入用户名密码，下载成功后，\~/tanwaylidar_driver/src文件夹下就会出现程序包。此步骤也可直接在github的项目下直接下载程序的zip压缩包，然后解压到\~/tanwaylidar_driver/src文件夹下。
