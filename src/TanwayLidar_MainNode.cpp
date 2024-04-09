@@ -127,7 +127,8 @@ int main(int argc, char** argv)
 
 	ros::NodeHandle nh_private("~");
 
-	ROS_INFO( "tanway lidar viewer for ROS" );
+	ROS_INFO( "tanway lidar viewer for ROS1");
+	ROS_INFO( "Version 3.0.10, 2024-04-09.");
 	ROS_INFO( "View in rviz");
 
 	//读取Launch配置文件

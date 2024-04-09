@@ -6,7 +6,7 @@
 		<param name="LidarType" type="int" value="13"/> 
 
 		<!--连接模式:仅支持"on-line"、"off-line"两种模式配置-->
-		<param name="ConnectType" type="string" value="off-line" />
+		<param name="ConnectType" type="string" value="on-line" />
 
 		<!--实时模式下配置-->
 		<!--本机IP地址-->
@@ -14,7 +14,7 @@
 
 		<!--回放模式下配置-->
 		<!--PCAP文件绝对路径-->
-		<param name="PcapFilePath" type="string" value="/home/tanway/lidar_data/Tempo-1043墙厚数据.pcap" />
+		<param name="PcapFilePath" type="string" value="/home/tanway/lidar_data/focus.pcap" />
 		
 	
 		<!--雷达设备的IP地址-->

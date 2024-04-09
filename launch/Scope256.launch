@@ -6,7 +6,7 @@
 		<param name="LidarType" type="int" value="11"/> 
 
 		<!--连接模式:仅支持"on-line"、"off-line"两种模式配置-->
-		<param name="ConnectType" type="string" value="off-line" />
+		<param name="ConnectType" type="string" value="on-line" />
 
 		<!--实时模式下配置-->
 		<!--本机IP地址-->
